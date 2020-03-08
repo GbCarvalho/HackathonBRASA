@@ -19,8 +19,6 @@ class Receipt extends Model {
 	}
 
 	static associate(models) {
-		this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user'});
-		this.belongsTo(models.Category, { foreignKey: 'category_id', as: 'user'});
 		this.belongsToMany(models.Product, {
 			through: 'Product_Receipt',
 			as: 'products',
