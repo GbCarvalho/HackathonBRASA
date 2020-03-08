@@ -20,6 +20,8 @@ class Usuario extends Model{
             },
         );
 
+        
+
         this.addHook('beforeSave', async (user)=>{
             if (user.password) {
                 user.password_hash = await bcypt.hash(user.password, 12);
@@ -28,6 +30,10 @@ class Usuario extends Model{
 
         return this;
     };
+
+    static associate(models) {
+        this.hasMany(models.Emprestimo, { foreignKey: 'avatar_id'});
+    }
 
     checkPassword(password) {
         return bcrypt.compare(password, this.password_hash);
