@@ -17,6 +17,14 @@ class NotaFiscal extends Model {
 
         return this;
     }
+
+    static associate(models) {
+        this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user'});
+    }
+    static associate(models) {
+        this.belongsTo(models.Category, { foreignKey: 'category_id', as: 'user'});
+    }
+
 }
 
 export default NotaFiscal;
