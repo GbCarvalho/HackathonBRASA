@@ -16,4 +16,4 @@ class Product_Receipt extends Model {
 
 }
 
-export default Product_Receipt();
+export default Product_Receipt;

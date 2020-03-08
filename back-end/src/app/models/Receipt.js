@@ -30,4 +30,4 @@ class Receipt extends Model {
 
 }
 
-export default Receipt();
+export default Receipt;
