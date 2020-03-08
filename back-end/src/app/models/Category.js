@@ -4,7 +4,7 @@ class Category extends Model {
   static init(sequelize) {
     super.init(
       {
-        nome: Sequelize.STRING
+        name: Sequelize.STRING
       },
       {
         sequelize
