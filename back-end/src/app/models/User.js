@@ -4,11 +4,11 @@ class User extends Model {
   static init(sequelize) {
     super.init(
       {
-        nome: Sequelize.STRING,
-        sobrenome: Sequelize.STRING,
+        name: Sequelize.STRING,
+        surname: Sequelize.STRING,
         email: Sequelize.STRING,
-        data_nascimento: Sequelize.DATE,
-        sexo: Sequelize.NUMBER,
+        bith_date: Sequelize.DATE,
+        sex: Sequelize.INTEGER,
         cpf: Sequelize.STRING
       },
       {
@@ -17,10 +17,6 @@ class User extends Model {
     );
     return this;
   }
-
-  
-
-
 }
 
 export default User;
