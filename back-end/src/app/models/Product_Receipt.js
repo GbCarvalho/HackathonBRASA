@@ -13,9 +13,6 @@ class Product_Receipt extends Model {
     );
     return this;
   }
-  static associate(models) {
-    this.belongsToMany()
-  }
 
 }
 

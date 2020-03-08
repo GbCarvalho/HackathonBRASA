@@ -13,6 +13,9 @@ class Category extends Model {
 
     return this;
   }
+  static associate(models) {
+    this.belongsTo(models.File, { foreignKey: 'file_id', as : 'file'})
+  }
 }
 
-export default Category;
+export default Category();

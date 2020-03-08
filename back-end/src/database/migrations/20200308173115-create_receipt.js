@@ -28,13 +28,6 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull:false,
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id'},
-        onupdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull:false
-      },
       provider_id: {
         type: Sequelize.INTEGER,
         references: { model: 'providers', key: 'id' },
@@ -42,13 +35,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         allowNull: false,
       },
-      category_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'categories', key: 'id' },
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
-        allowNull: false,
-      },
+      
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
