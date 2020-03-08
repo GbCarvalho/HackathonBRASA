@@ -17,4 +17,4 @@ class Provider extends Model {
 	}
 }
 
-export default Provider();
+export default Provider;
