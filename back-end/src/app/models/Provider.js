@@ -4,8 +4,8 @@ class Provider extends Model {
 	static init(sequelize) {
 		super.init(
 			{
-				nome: Sequelize.STRING,
-				nome_fantasia: Sequelize.STRING,
+				name: Sequelize.STRING,
+				fantasy_name: Sequelize.STRING,
 				cnpj: Sequelize.STRING,
 			},
 			{
