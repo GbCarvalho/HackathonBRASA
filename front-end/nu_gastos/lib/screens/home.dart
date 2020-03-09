@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
               Center(
                 child: Text(pages[page]),
               ),
-              RelatoriosWidgwt(),
+              RelatoriosWidget(),
             ],
           );
         },
