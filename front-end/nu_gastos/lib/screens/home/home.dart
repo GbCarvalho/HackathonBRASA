@@ -1,7 +1,7 @@
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:nu_gastos/main.dart' as main;
-import 'package:nu_gastos/model/gasto.dart';
+import 'package:nu_gastos/model/transacao.dart';
 import 'package:nu_gastos/screens/educacao.dart';
 import 'package:nu_gastos/screens/home/content.dart';
 import 'package:nu_gastos/screens/lancamentos_manuais.dart';
@@ -73,14 +73,17 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'NuGastos',
+        title: Center(
+          child: Text(
+            'NuGastos',
+          ),
         ),
+        elevation: 1,
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.filter_list,
-              size: 30,
+              Entypo.funnel,
+              size: 28,
               color: Colors.white,
             ),
             onPressed: null,
@@ -154,7 +157,7 @@ class _HomeState extends State<Home> {
             ),
           ]),
       floatingActionButton: Transform.scale(
-        scale: 1.5,
+        scale: 1.2,
         child: FloatingActionButton(
           onPressed: null,
           splashColor: main.nubankRoxoPrincipal,
