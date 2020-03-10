@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nu_gastos/screens/home.dart';
+import 'package:nu_gastos/screens/home/home.dart';
 
 //? Paleta de cores
 Map<int, Color> color = {
@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'NuGasto',
       theme: ThemeData.light().copyWith(
-        primaryColor: nubankRoxoPrincipal,
-        bottomAppBarColor: nubankRoxoPrincipal,
+        primaryColor: nubankRoxoEscuro,
+        bottomAppBarColor: nubankRoxoEscuroClaro,
         iconTheme: IconThemeData(color: nubankRoxoCinza),
       ),
       home: Home(),
