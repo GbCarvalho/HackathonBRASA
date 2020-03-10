@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Transacao {
   int tipo; // ? {0: "saída", 1 : "entrada", 2 : "meta"}
   String nome;
@@ -5,6 +7,7 @@ class Transacao {
   double valor;
   String data;
   String categoria;
+  IconData icon;
   List<String> gastos;
 
   Transacao(
@@ -14,7 +17,10 @@ class Transacao {
       this.data,
       this.categoria,
       this.gastos,
-      this.tipo});
+      this.icon = Icons.edit,
+      this.tipo}) {
+    valor = tipo > 0 ? valor : valor * -1;
+  }
 
   Transacao.fromJson(Map<String, dynamic> json) {
     tipo = json['tipo'];

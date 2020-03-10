@@ -1,7 +1,7 @@
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:nu_gastos/main.dart' as main;
-import 'package:nu_gastos/model/gasto.dart';
+import 'package:nu_gastos/model/transacao.dart';
 import 'package:nu_gastos/screens/educacao.dart';
 import 'package:nu_gastos/screens/home/content.dart';
 import 'package:nu_gastos/screens/lancamentos_manuais.dart';
@@ -73,18 +73,32 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'NuGastos',
-        ),
+        elevation: 1,
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.filter_list,
-              size: 30,
-              color: Colors.white,
+              Entypo.funnel,
+              size: 28,
+              color: main.nubankRoxoCinza,
             ),
-            onPressed: null,
-          )
+            onPressed: () {},
+          ),
+          Spacer(),
+          Center(
+            child: Text(
+              'Nu Gasto',
+              style: Theme.of(context).textTheme.title,
+            ),
+          ),
+          Spacer(),
+          IconButton(
+            icon: Icon(
+              Icons.close,
+              size: 28,
+              color: main.nubankRoxoCinza,
+            ),
+            onPressed: () {},
+          ),
         ],
       ),
       body: PageView.builder(
@@ -154,10 +168,12 @@ class _HomeState extends State<Home> {
             ),
           ]),
       floatingActionButton: Transform.scale(
-        scale: 1.5,
+        scale: 1.2,
         child: FloatingActionButton(
-          onPressed: null,
+          onPressed: () {},
+          backgroundColor: main.nubankRoxoCinza,
           splashColor: main.nubankRoxoPrincipal,
+          child: Center(child: Icon(MaterialCommunityIcons.qrcode_scan)),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

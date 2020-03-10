@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:nu_gastos/screens/home/home.dart';
 
 //? Paleta de cores
@@ -19,7 +18,7 @@ Map<int, Color> color = {
 // ? Tamanhos
 double actionIconSize = 30.0;
 
-var nubankRoxoPrincipal = MaterialColor(0xff8A05BE, color);
+var nubankRoxoPrincipal = MaterialColor(0xff81269D, color);
 var nubankBranco = MaterialColor(0xffFFFFFF, color);
 var nubankRoxoCinza = MaterialColor(0xffB3A0B6, color);
 var nubankRoxoEscuroClaro = MaterialColor(0xff443147, color);
@@ -43,10 +42,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'NuGasto',
       theme: ThemeData.light().copyWith(
-        primaryColor: nubankRoxoEscuro,
-        bottomAppBarColor: nubankRoxoEscuroClaro,
-        iconTheme: IconThemeData(color: nubankRoxoCinza),
-      ),
+          primaryColor: nubankRoxoEscuro,
+          bottomAppBarColor: nubankRoxoEscuroClaro,
+          iconTheme: IconThemeData(color: nubankRoxoCinza),
+          textTheme: TextTheme(
+            title: TextStyle(color: nubankRoxoCinza),
+          )),
       home: Home(),
     );
   }
