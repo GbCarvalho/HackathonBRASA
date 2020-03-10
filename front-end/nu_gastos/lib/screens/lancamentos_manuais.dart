@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+var title = 'Lançamento manual';
+
+String get getTitle => title;
+
 class LancamentosManuaisWidget extends StatefulWidget {
   @override
   _LancamentosManuaisWidgetState createState() =>

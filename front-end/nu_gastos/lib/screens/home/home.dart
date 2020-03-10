@@ -1,7 +1,12 @@
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:nu_gastos/main.dart' as main;
-import 'package:nu_gastos/screens/relatorios.dart';
+import 'package:nu_gastos/model/gasto.dart';
+import 'package:nu_gastos/screens/educacao.dart';
+import 'package:nu_gastos/screens/home/content.dart';
+import 'package:nu_gastos/screens/lancamentos_manuais.dart';
+import 'package:nu_gastos/screens/metas.dart';
+import 'package:nu_gastos/screens/relatorios/relatorios.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,7 +20,42 @@ Widget _buildMovimentationsList() {
 class _HomeState extends State<Home> {
   var _currentIndex = 0;
   PageController pageController;
-  var pages = ['Relatórios', 'Lançamento Manual', 'Educação', 'Metas'];
+
+  // Destinos para as telas
+  Map<int, Widget> pages = {
+    0: RelatoriosWidget(), //'Relatorios'
+    1: HomeContentWidget(
+      movimentacoes: <Transacao>[
+        Transacao(
+          tipo: 0,
+          nome: 'Mercado',
+          descricao: 'Descrição do gasto',
+          valor: 500,
+          categoria: 'Despesas',
+          data: DateTime.now().toString(),
+        ),
+        Transacao(
+          tipo: 1,
+          nome: 'Pagamento',
+          descricao: 'Salário de abril/2019',
+          valor: 15000,
+          categoria: 'Rendas',
+          data: DateTime.now().toString(),
+        ),
+        Transacao(
+          tipo: 2,
+          nome: 'Notebook',
+          descricao: 'Compra do novo laptop',
+          valor: 25000,
+          categoria: 'Compras',
+          data: DateTime.now().toString(),
+        ),
+      ],
+    ), //'Home':
+    2: LancamentosManuaisWidget(), //'Lançamento Manual'
+    3: EducacaoWidget(), //'Educação'
+    4: MetasWidget(), //'Metas'
+  };
 
   @override
   void initState() {
@@ -52,14 +92,7 @@ class _HomeState extends State<Home> {
         controller: pageController,
         reverse: false,
         itemBuilder: (context, page) {
-          return Column(
-            children: <Widget>[
-              Center(
-                child: Text(pages[page]),
-              ),
-              RelatoriosWidget(),
-            ],
-          );
+          return pages[page];
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -85,7 +118,7 @@ class _HomeState extends State<Home> {
                 color: Theme.of(context).iconTheme.color,
               ),
               title: Text(
-                pages[0],
+                'Relatórios',
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -95,7 +128,7 @@ class _HomeState extends State<Home> {
                 color: Theme.of(context).iconTheme.color,
               ),
               title: Text(
-                pages[1],
+                'Home',
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -105,7 +138,7 @@ class _HomeState extends State<Home> {
                 color: Theme.of(context).iconTheme.color,
               ),
               title: Text(
-                pages[2],
+                'Lançamento manual',
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -115,7 +148,7 @@ class _HomeState extends State<Home> {
                 color: Theme.of(context).iconTheme.color,
               ),
               title: Text(
-                pages[3],
+                'Educação',
                 style: TextStyle(color: Colors.white),
               ),
             ),
