@@ -73,21 +73,32 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            'NuGastos',
-          ),
-        ),
         elevation: 1,
         actions: <Widget>[
           IconButton(
             icon: Icon(
               Entypo.funnel,
               size: 28,
-              color: Colors.white,
+              color: main.nubankRoxoCinza,
             ),
-            onPressed: null,
-          )
+            onPressed: () {},
+          ),
+          Spacer(),
+          Center(
+            child: Text(
+              'Nu Gasto',
+              style: Theme.of(context).textTheme.title,
+            ),
+          ),
+          Spacer(),
+          IconButton(
+            icon: Icon(
+              Icons.close,
+              size: 28,
+              color: main.nubankRoxoCinza,
+            ),
+            onPressed: () {},
+          ),
         ],
       ),
       body: PageView.builder(
@@ -159,8 +170,10 @@ class _HomeState extends State<Home> {
       floatingActionButton: Transform.scale(
         scale: 1.2,
         child: FloatingActionButton(
-          onPressed: null,
+          onPressed: () {},
+          backgroundColor: main.nubankRoxoCinza,
           splashColor: main.nubankRoxoPrincipal,
+          child: Center(child: Icon(MaterialCommunityIcons.qrcode_scan)),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

@@ -42,10 +42,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'NuGasto',
       theme: ThemeData.light().copyWith(
-        primaryColor: nubankRoxoEscuro,
-        bottomAppBarColor: nubankRoxoEscuroClaro,
-        iconTheme: IconThemeData(color: nubankRoxoCinza),
-      ),
+          primaryColor: nubankRoxoEscuro,
+          bottomAppBarColor: nubankRoxoEscuroClaro,
+          iconTheme: IconThemeData(color: nubankRoxoCinza),
+          textTheme: TextTheme(
+            title: TextStyle(color: nubankRoxoCinza),
+          )),
       home: Home(),
     );
   }
