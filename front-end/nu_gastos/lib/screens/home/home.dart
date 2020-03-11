@@ -102,7 +102,12 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: PageView.builder(
-        itemCount: pages.length,
+        onPageChanged: (int page) {
+          setState(() {
+            _currentIndex = page;
+          });
+        },
+        itemCount: pages.length - 1,
         controller: pageController,
         reverse: false,
         itemBuilder: (context, page) {
@@ -120,10 +125,6 @@ class _HomeState extends State<Home> {
           onTap: (page) {
             pageController.animateToPage(page,
                 duration: Duration(seconds: 1), curve: Curves.easeOutQuint);
-
-            setState(() {
-              _currentIndex = page;
-            });
           },
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
