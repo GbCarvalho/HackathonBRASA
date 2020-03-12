@@ -16,9 +16,15 @@ class RelatoriosWidget extends StatelessWidget {
         children: <Widget>[
           RelatorioMesWidget(
             bars: <ChartBarWidget>[
-              ChartBarWidget(),
-              ChartBarWidget(),
-              ChartBarWidget(),
+              ChartBarWidget(
+                barsDistance: 0.06,
+                barLimit: 300,
+                bars: <Bar>[
+                  Bar(barColor: Colors.amber, barFill: 200),
+                  Bar(barColor: Colors.red),
+                  Bar(barColor: Colors.blue, barFill: 68),
+                ],
+              ),
               ChartBarWidget(),
             ],
           ),
