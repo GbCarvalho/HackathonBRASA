@@ -53,12 +53,14 @@ class ChartBarWidget extends StatelessWidget {
 
 class Bar extends StatelessWidget {
   final double barWidth;
+  final double barHeight;
   final double barFill;
   final Color barColor;
   static double limit = 1;
 
   const Bar({
     Key key,
+    this.barHeight = 10,
     this.barWidth = 10,
     this.barFill = 150,
     this.barColor,
@@ -72,7 +74,11 @@ class Bar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Container(
-          width: barFill, //barLimit == null ? barFill : 150.0 / barLimit,
+          width: barFill < MediaQuery.of(context).size.width
+              ? barFill
+              : MediaQuery.of(context)
+                  .size
+                  .width, //barLimit == null ? barFill : 150.0 / barLimit,
           height: barWidth,
           decoration: BoxDecoration(
             color: barColor == null
