@@ -7,19 +7,46 @@ import 'package:nu_gastos/screens/home/content.dart';
 import 'package:nu_gastos/screens/lancamentos_manuais.dart';
 import 'package:nu_gastos/screens/metas.dart';
 import 'package:nu_gastos/screens/relatorios/relatorios.dart';
+import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
-Widget _buildMovimentationsList() {
-  return ListTile();
-}
-
 class _HomeState extends State<Home> {
   var _currentIndex = 0;
   PageController pageController;
+
+  String qrcode_result = "";
+
+  Future _scanQR() async {
+    try {
+      String qrResult = await BarcodeScanner.scan();
+      setState(() {
+        qrcode_result = qrResult;
+      });
+    } on PlatformException catch (ex) {
+      if (ex.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          qrcode_result = "Camera permissions was denied!";
+        });
+      } else {
+        setState(() {
+          qrcode_result = 'Unknown Error ${ex}';
+        });
+      }
+    } on FormatException {
+      setState(() {
+        qrcode_result = "You pressed the back button before scanning anything";
+      });
+    } catch (ex) {
+      setState(() {
+        qrcode_result = 'Unknown Error ${ex}';
+      });
+    }
+  }
 
   // Destinos para as telas
   Map<int, Widget> pages = {
@@ -172,7 +199,7 @@ class _HomeState extends State<Home> {
       floatingActionButton: Transform.scale(
         scale: 1.2,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: _scanQR,
           backgroundColor: main.nubankRoxoCinza,
           splashColor: main.nubankRoxoPrincipal,
           child: Center(child: Icon(MaterialCommunityIcons.qrcode_scan)),

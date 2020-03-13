@@ -6,6 +6,14 @@ class RelatorioMesWidget extends StatefulWidget {
   final List<ChartBarWidget> bars;
   final double barWidth;
 
+  _atribuirWidth(List<ChartBarWidget> bars) {
+    bars.forEach((bar) {
+      bar.bars.forEach((innerBar) {
+        // innerBar.barWidth = this.barWidth;
+      });
+    });
+  }
+
   const RelatorioMesWidget({Key key, @required this.bars, this.barWidth = 10})
       : super(key: key);
 
