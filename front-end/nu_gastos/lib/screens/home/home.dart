@@ -102,6 +102,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: PageView.builder(
+        physics: BouncingScrollPhysics(),
         onPageChanged: (int page) {
           setState(() {
             _currentIndex = page;

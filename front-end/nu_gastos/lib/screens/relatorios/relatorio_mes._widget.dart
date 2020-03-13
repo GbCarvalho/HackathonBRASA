@@ -4,8 +4,10 @@ import 'package:nu_gastos/screens/relatorios/chart_bar.dart';
 
 class RelatorioMesWidget extends StatefulWidget {
   final List<ChartBarWidget> bars;
+  final double barWidth;
 
-  const RelatorioMesWidget({Key key, @required this.bars}) : super(key: key);
+  const RelatorioMesWidget({Key key, @required this.bars, this.barWidth = 10})
+      : super(key: key);
 
   @override
   RelatorioMeshWidgetState createState() => RelatorioMeshWidgetState();
@@ -14,7 +16,7 @@ class RelatorioMesWidget extends StatefulWidget {
 class RelatorioMeshWidgetState extends State<RelatorioMesWidget> {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: widget.bars,
     );
