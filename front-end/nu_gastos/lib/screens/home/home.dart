@@ -19,31 +19,31 @@ class _HomeState extends State<Home> {
   var _currentIndex = 0;
   PageController pageController;
 
-  String qrcode_result = "";
+  String qrcodResult = "";
 
   Future _scanQR() async {
     try {
       String qrResult = await BarcodeScanner.scan();
       setState(() {
-        qrcode_result = qrResult;
+        qrcodResult = qrResult;
       });
     } on PlatformException catch (ex) {
       if (ex.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
-          qrcode_result = "Camera permissions was denied!";
+          qrcodResult = "Camera permissions was denied!";
         });
       } else {
         setState(() {
-          qrcode_result = 'Unknown Error ${ex}';
+          qrcodResult = 'Unknown Error $ex';
         });
       }
     } on FormatException {
       setState(() {
-        qrcode_result = "You pressed the back button before scanning anything";
+        qrcodResult = "You pressed the back button before scanning anything";
       });
     } catch (ex) {
       setState(() {
-        qrcode_result = 'Unknown Error ${ex}';
+        qrcodResult = 'Unknown Error $ex';
       });
     }
   }

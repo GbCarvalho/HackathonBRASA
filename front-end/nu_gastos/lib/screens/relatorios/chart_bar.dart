@@ -17,7 +17,9 @@ class ChartBarWidget extends StatelessWidget {
     if (bars != null)
       for (int pos = 1; pos < bars.length; pos++) {
         bars[pos].setLimit = this.barLimit;
-        bars[pos].setMarginLeft = bars[pos - 1].getBarHeight - 7;
+        for (int i = pos; i > 1; i--) {
+          bars[pos].setMarginLeft = bars[pos - 1].getBarHeight - 7;
+        }
       }
   }
 
