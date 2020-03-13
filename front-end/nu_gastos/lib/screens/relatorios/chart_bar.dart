@@ -15,9 +15,10 @@ class ChartBarWidget extends StatelessWidget {
 
   _atribuirLimites() {
     if (bars != null)
-      bars.forEach((bar) {
-        bar.setLimit = this.barLimit;
-      });
+      for (int pos = 1; pos < bars.length; pos++) {
+        bars[pos].setLimit = this.barLimit;
+        bars[pos].setMarginLeft = bars[pos - 1].getBarHeight - 7;
+      }
   }
 
   @override
@@ -41,7 +42,7 @@ class ChartBarWidget extends StatelessWidget {
           children: bars == null
               ? <Bar>[
                   Bar(
-                    barFill: barLimit * 0.5,
+                    height: barLimit * 0.5,
                   )
                 ]
               : bars,
@@ -53,45 +54,49 @@ class ChartBarWidget extends StatelessWidget {
 
 class Bar extends StatelessWidget {
   final double barWidth;
-  final double barHeight;
-  final double barFill;
+  final double height;
   final Color barColor;
   static double limit = 1;
+  static double marginLeft = 0;
+  final bool isFirstBar;
+
+  set setLimit(double value) => limit = value;
+  set setMarginLeft(double value) => marginLeft = value;
+  get getBarHeight => this.height;
+  get getIsFirstBar => this.isFirstBar;
 
   const Bar({
     Key key,
-    this.barHeight = 10,
+    this.height = 150,
     this.barWidth = 10,
-    this.barFill = 150,
     this.barColor,
+    this.isFirstBar = false,
   }) : super(key: key);
 
-  set setLimit(double value) => limit = value;
+  get getHeight => height;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          width: barFill < MediaQuery.of(context).size.width
-              ? barFill
-              : MediaQuery.of(context)
-                  .size
-                  .width, //barLimit == null ? barFill : 150.0 / barLimit,
-          height: barWidth,
-          decoration: BoxDecoration(
-            color: barColor == null
-                ? limit <= barFill && limit != null
-                    ? main.nubankCinza.withOpacity(0.35)
-                    : main.nubankCinza
-                : limit <= barFill && limit != null
-                    ? barColor.withOpacity(0.35)
-                    : barColor,
-            borderRadius: BorderRadius.circular(10),
-          ),
+    return Padding(
+      padding: EdgeInsets.only(left: isFirstBar ? 0 : marginLeft),
+      child: Container(
+        width: height < MediaQuery.of(context).size.width
+            ? height
+            : MediaQuery.of(context)
+                .size
+                .width, //barLimit == null ? barFill : 150.0 / barLimit,
+        height: barWidth,
+        decoration: BoxDecoration(
+          color: barColor == null
+              ? limit <= height && limit != null
+                  ? main.nubankCinza.withOpacity(0.35)
+                  : main.nubankCinza
+              : limit <= height && limit != null
+                  ? barColor.withOpacity(0.35)
+                  : barColor,
+          borderRadius: BorderRadius.circular(10),
         ),
-      ],
+      ),
     );
   }
 }
