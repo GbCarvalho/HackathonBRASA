@@ -2,7 +2,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:nu_gasto/main.dart' as main;
 import 'package:nu_gasto/model/transacao.dart';
-import 'package:nu_gasto/screens/educacao.dart';
+import 'package:nu_gasto/screens/educacao/educacao.dart';
 import 'package:nu_gasto/screens/home/content.dart';
 import 'package:nu_gasto/screens/lancamentos_manuais.dart';
 import 'package:nu_gasto/screens/metas.dart';
