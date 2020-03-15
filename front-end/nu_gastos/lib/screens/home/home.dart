@@ -130,7 +130,7 @@ class _HomeState extends State<Home> {
           ],
         ),
         body: PageView.builder(
-          physics: BouncingScrollPhysics(),
+          physics: ScrollPhysics(),
           onPageChanged: (int page) {
             setState(() {
               _currentIndex = page;
@@ -153,7 +153,7 @@ class _HomeState extends State<Home> {
             ),
             onTap: (page) {
               pageController.animateToPage(page,
-                  duration: Duration(seconds: 1), curve: Curves.ease);
+                  duration: Duration(seconds: 1), curve: Curves.easeOutQuint);
             },
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(

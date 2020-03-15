@@ -1,25 +1,35 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'package:nu_gasto/main.dart' as main;
 
 class ChartBarWidget extends StatelessWidget {
   final double barLimit;
-  final double barsDistance;
+  final double distanceAroundChildChartBars;
   final List<Bar> bars;
+  final double innerBarsDistance;
 
   const ChartBarWidget({
     Key key,
     this.barLimit = 300.0,
     this.bars,
-    this.barsDistance = 0.03, //Tem que ser um valor entre 0 e 1
+    this.distanceAroundChildChartBars = 0.03, //Tem que ser um valor entre 0 e 1
+    this.innerBarsDistance = -5,
   }) : super(key: key);
 
   _atribuirLimites() {
+    double margin;
     if (bars != null)
-      for (int pos = 1; pos < bars.length; pos++) {
+      for (int pos = 0; pos < bars.length; pos++) {
         bars[pos].setLimit = this.barLimit;
-        for (int i = pos; i > 1; i--) {
-          bars[pos].setMarginLeft = bars[pos - 1].getBarHeight - 7;
+        for (int posMargin = pos; posMargin > 0; posMargin--) {
+          if (!bars[posMargin].isFirstBar)
+            margin += bars[posMargin - 1].getHeight + innerBarsDistance;
         }
+        print('margin for bar $pos: $margin');
+        bars[pos].setMarginLeft = margin;
+        if (bars.length > 2 && pos == bars.length - 1)
+          bars[pos].setMarginLeft = bars[pos].marginLeft;
+        margin = 0;
       }
   }
 
@@ -28,10 +38,12 @@ class ChartBarWidget extends StatelessWidget {
     _atribuirLimites();
 
     return Stack(
+      textDirection: TextDirection.rtl,
       alignment: AlignmentDirectional.centerStart,
       children: <Widget>[
         SizedBox(
-          height: MediaQuery.of(context).size.height * barsDistance,
+          height:
+              MediaQuery.of(context).size.height * distanceAroundChildChartBars,
         ),
         Container(
           width:
@@ -40,6 +52,7 @@ class ChartBarWidget extends StatelessWidget {
           color: main.nubankVerde,
         ),
         Stack(
+          textDirection: TextDirection.ltr,
           alignment: AlignmentDirectional.bottomStart,
           children: bars == null
               ? <Bar>[
@@ -56,18 +69,19 @@ class ChartBarWidget extends StatelessWidget {
 
 class Bar extends StatelessWidget {
   final double barWidth;
-  final double height;
+  double height;
   final Color barColor;
   static double limit = 1;
-  static double marginLeft = 0;
+  double marginLeft = 0;
   final bool isFirstBar;
 
   set setLimit(double value) => limit = value;
   set setMarginLeft(double value) => marginLeft = value;
+  set setHeight(double value) => height = value;
   get getBarHeight => this.height;
   get getIsFirstBar => this.isFirstBar;
 
-  const Bar({
+  Bar({
     Key key,
     this.height = 150,
     this.barWidth = 10,
@@ -91,10 +105,10 @@ class Bar extends StatelessWidget {
         decoration: BoxDecoration(
           color: barColor == null
               ? limit <= height && limit != null
-                  ? main.nubankCinza.withOpacity(0.35)
+                  ? main.nubankCinza.withOpacity(0.3)
                   : main.nubankCinza
               : limit <= height && limit != null
-                  ? barColor.withOpacity(0.35)
+                  ? barColor.withOpacity(0.3)
                   : barColor,
           borderRadius: BorderRadius.circular(10),
         ),

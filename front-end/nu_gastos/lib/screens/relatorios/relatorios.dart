@@ -17,12 +17,15 @@ class RelatoriosWidget extends StatelessWidget {
           RelatorioMesWidget(
             bars: <ChartBarWidget>[
               ChartBarWidget(
-                barsDistance: 0.1,
-                barLimit: 300,
+                distanceAroundChildChartBars: 0.01,
+                innerBarsDistance: -10,
+                barLimit: 400,
                 bars: <Bar>[
-                  Bar(barColor: Colors.amber, height: 50, isFirstBar: true),
-                  Bar(barColor: Colors.red, height: 150),
-                  Bar(barColor: Colors.purpleAccent, height: 125),
+                  Bar(barColor: main.nubankAzul, height: 100, isFirstBar: true),
+                  //Bar(barColor: main.nubankVermelhoChiclete, height: 100),
+                  //Bar(barColor: main.nubankVerde, height: 100),
+                  //Bar(barColor: main.nubankRoxoCinza, height: 100),
+                  //Bar(barColor: main.nubankBranco, height: 50),
                 ],
               ),
               ChartBarWidget(),
