@@ -100,10 +100,63 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 1,
-          actions: <Widget>[
-            IconButton(
+      appBar: AppBar(
+        elevation: 1,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Entypo.funnel,
+              size: 28,
+              color: main.nubankRoxoCinza,
+            ),
+            onPressed: () {},
+          ),
+          Spacer(),
+          Center(
+            child: Text(
+              'Nu Gasto',
+              style: Theme.of(context).textTheme.title,
+            ),
+          ),
+          Spacer(),
+          IconButton(
+            icon: Icon(
+              Icons.close,
+              size: 28,
+              color: main.nubankRoxoCinza,
+            ),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: PageView.builder(
+        physics: ScrollPhysics(),
+        onPageChanged: (int page) {
+          setState(() {
+            _currentIndex = page;
+          });
+        },
+        itemCount: pages.length - 1,
+        controller: pageController,
+        reverse: false,
+        itemBuilder: (context, page) {
+          return pages[page];
+        },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Theme.of(context).bottomAppBarColor,
+          selectedIconTheme: IconThemeData(
+            color: Colors.white,
+            size: 42,
+          ),
+          onTap: (page) {
+            pageController.animateToPage(page,
+                duration: Duration(seconds: 1), curve: Curves.easeOutQuint);
+          },
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
               icon: Icon(
                 Entypo.funnel,
                 size: 28,
