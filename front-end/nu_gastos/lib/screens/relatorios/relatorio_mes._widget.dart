@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nu_gastos/main.dart' as main;
-import 'package:nu_gastos/screens/relatorios/chart_bar.dart';
+import 'package:nu_gasto/main.dart' as main;
+import 'package:nu_gasto/screens/relatorios/chart_bar.dart';
 
 class RelatorioMesWidget extends StatefulWidget {
   final List<ChartBarWidget> bars;

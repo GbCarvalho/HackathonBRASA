@@ -1,4 +1,4 @@
-# nu_gastos
+# nu_gasto
 
 A new Flutter project.
 
