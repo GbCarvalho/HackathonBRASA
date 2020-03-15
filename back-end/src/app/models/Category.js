@@ -4,7 +4,7 @@ class Category extends Model {
   static init(sequelize) {
     super.init(
       {
-        nome: Sequelize.STRING
+        name: Sequelize.STRING
       },
       {
         sequelize
@@ -12,6 +12,9 @@ class Category extends Model {
     );
 
     return this;
+  }
+  static associate(models) {
+    this.belongsTo(models.File, { foreignKey: 'file_id', as : 'file'})
   }
 }
 

@@ -26,4 +26,4 @@ class Product extends Model {
   }
 }
 
-export default Product();
+export default Product;

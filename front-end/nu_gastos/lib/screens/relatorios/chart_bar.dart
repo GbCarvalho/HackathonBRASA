@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nu_gastos/main.dart' as main;
 import 'dart:math';
+import 'package:nu_gasto/main.dart' as main;
 
 class ChartBarWidget extends StatelessWidget {
   final double barLimit;

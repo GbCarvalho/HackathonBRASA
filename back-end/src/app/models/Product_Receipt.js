@@ -13,10 +13,7 @@ class Product_Receipt extends Model {
     );
     return this;
   }
-  static associate(models) {
-    this.belongsToMany()
-  }
 
 }
 
-export default Product_Receipt();
+export default Product_Receipt;

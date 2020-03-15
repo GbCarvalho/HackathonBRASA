@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nu_gastos/model/transacao.dart';
-import 'package:nu_gastos/main.dart' as main;
+import 'package:nu_gasto/model/transacao.dart';
+import 'package:nu_gasto/main.dart' as main;
 
 class HomeContentWidget extends StatelessWidget {
   final List<Transacao> movimentacoes;

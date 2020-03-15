@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nu_gastos/screens/home/home.dart';
+import 'package:nu_gasto/screens/home/home.dart';
 
 //? Paleta de cores
 Map<int, Color> color = {

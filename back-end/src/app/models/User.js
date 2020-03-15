@@ -9,10 +9,10 @@ class User extends Model {
         email: Sequelize.STRING,
         bith_date: Sequelize.DATE,
         sex: Sequelize.INTEGER,
-        cpf: Sequelize.STRING
+        cpf: Sequelize.STRING,
       },
       {
-        sequelize
+        sequelize,
       }
     );
     return this;

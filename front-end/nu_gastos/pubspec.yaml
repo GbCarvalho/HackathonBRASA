@@ -1,4 +1,4 @@
-name: nu_gastos
+name: nu_gasto
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -26,6 +26,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   barcode_scan:
+  flutter_speed_dial:
 
 dev_dependencies:
   flutter_test:

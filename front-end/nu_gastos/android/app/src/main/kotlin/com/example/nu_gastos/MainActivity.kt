@@ -1,4 +1,4 @@
-package com.example.nu_gastos
+package com.example.nu_gasto
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

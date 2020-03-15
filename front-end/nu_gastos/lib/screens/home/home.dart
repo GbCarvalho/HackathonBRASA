@@ -1,14 +1,15 @@
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:nu_gastos/main.dart' as main;
-import 'package:nu_gastos/model/transacao.dart';
-import 'package:nu_gastos/screens/educacao.dart';
-import 'package:nu_gastos/screens/home/content.dart';
-import 'package:nu_gastos/screens/lancamentos_manuais.dart';
-import 'package:nu_gastos/screens/metas.dart';
-import 'package:nu_gastos/screens/relatorios/relatorios.dart';
+import 'package:nu_gasto/main.dart' as main;
+import 'package:nu_gasto/model/transacao.dart';
+import 'package:nu_gasto/screens/educacao.dart';
+import 'package:nu_gasto/screens/home/content.dart';
+import 'package:nu_gasto/screens/lancamentos_manuais.dart';
+import 'package:nu_gasto/screens/metas.dart';
+import 'package:nu_gasto/screens/relatorios/relatorios.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -19,31 +20,31 @@ class _HomeState extends State<Home> {
   var _currentIndex = 0;
   PageController pageController;
 
-  String qrcode_result = "";
+  String qrcodResult = "";
 
   Future _scanQR() async {
     try {
       String qrResult = await BarcodeScanner.scan();
       setState(() {
-        qrcode_result = qrResult;
+        qrcodResult = qrResult;
       });
     } on PlatformException catch (ex) {
       if (ex.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
-          qrcode_result = "Camera permissions was denied!";
+          qrcodResult = "Camera permissions was denied!";
         });
       } else {
         setState(() {
-          qrcode_result = 'Unknown Error ${ex}';
+          qrcodResult = 'Unknown Error $ex';
         });
       }
     } on FormatException {
       setState(() {
-        qrcode_result = "You pressed the back button before scanning anything";
+        qrcodResult = "You pressed the back button before scanning anything";
       });
     } catch (ex) {
       setState(() {
-        qrcode_result = 'Unknown Error ${ex}';
+        qrcodResult = 'Unknown Error $ex';
       });
     }
   }
@@ -157,55 +158,133 @@ class _HomeState extends State<Home> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
-                MaterialCommunityIcons.script_text_outline,
-                color: Theme.of(context).iconTheme.color,
+                Entypo.funnel,
+                size: 28,
+                color: main.nubankRoxoCinza,
               ),
-              title: Text(
-                'Relatórios',
-                style: TextStyle(color: Colors.white),
+              onPressed: () {},
+            ),
+            Spacer(),
+            Center(
+              child: Text(
+                'Nu Gasto',
+                style: Theme.of(context).textTheme.title,
               ),
             ),
-            BottomNavigationBarItem(
+            Spacer(),
+            IconButton(
               icon: Icon(
-                MaterialCommunityIcons.pencil_plus_outline,
-                color: Theme.of(context).iconTheme.color,
+                Icons.close,
+                size: 28,
+                color: main.nubankRoxoCinza,
               ),
-              title: Text(
-                'Home',
-                style: TextStyle(color: Colors.white),
-              ),
+              onPressed: () {},
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.local_library,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              title: Text(
-                'Lançamento manual',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.merge_type,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              title: Text(
-                'Educação',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ]),
-      floatingActionButton: Transform.scale(
-        scale: 1.2,
-        child: FloatingActionButton(
-          onPressed: _scanQR,
-          backgroundColor: main.nubankRoxoCinza,
-          splashColor: main.nubankRoxoPrincipal,
-          child: Center(child: Icon(MaterialCommunityIcons.qrcode_scan)),
+          ],
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
+        body: PageView.builder(
+          physics: BouncingScrollPhysics(),
+          onPageChanged: (int page) {
+            setState(() {
+              _currentIndex = page;
+            });
+          },
+          itemCount: pages.length - 1,
+          controller: pageController,
+          reverse: false,
+          itemBuilder: (context, page) {
+            return pages[page];
+          },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Theme.of(context).bottomAppBarColor,
+            selectedIconTheme: IconThemeData(
+              color: Colors.white,
+              size: 42,
+            ),
+            onTap: (page) {
+              pageController.animateToPage(page,
+                  duration: Duration(seconds: 1), curve: Curves.ease);
+            },
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(
+                  MaterialCommunityIcons.script_text_outline,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                title: Text(
+                  'Relatórios',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  MaterialCommunityIcons.pencil_plus_outline,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                title: Text(
+                  'Home',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.local_library,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                title: Text(
+                  'Lançamento manual',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.merge_type,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                title: Text(
+                  'Educação',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ]),
+        floatingActionButton: Transform.scale(
+          scale: 1.2,
+          child: SpeedDial(
+              marginRight: MediaQuery.of(context).size.width * 0.43,
+              marginBottom: MediaQuery.of(context).size.height * 0.07,
+              backgroundColor: main.nubankRoxoCinza,
+              overlayColor: Colors.black,
+              overlayOpacity: 0.5,
+              child: Icon(MaterialCommunityIcons.qrcode_scan),
+              children: [
+                SpeedDialChild(
+                  labelBackgroundColor: main.nubankRoxoEscuro,
+                  backgroundColor: main.nubankRoxoEscuroClaro,
+                  foregroundColor: main.nubankRoxoCinza,
+                  child: Icon(MaterialCommunityIcons.qrcode_scan),
+                  label: "Scanner de notas",
+                  labelStyle: TextStyle(fontSize: 11),
+                  onTap: _scanQR,
+                ),
+                SpeedDialChild(
+                  labelBackgroundColor: main.nubankRoxoEscuro,
+                  backgroundColor: main.nubankRoxoEscuroClaro,
+                  foregroundColor: main.nubankRoxoCinza,
+                  child: Icon(MaterialCommunityIcons.pencil_plus_outline),
+                  label: "Lançamento manual",
+                  labelStyle: TextStyle(fontSize: 11),
+                )
+              ]),
+        ));
   }
 }
+
+// FloatingActionButton(
+//           onPressed: _scanQR,
+//           backgroundColor: main.nubankRoxoCinza,
+//           splashColor: main.nubankRoxoPrincipal,
+//           child: Center(child: Icon(MaterialCommunityIcons.qrcode_scan)),
+//         ),
