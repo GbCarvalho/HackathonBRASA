@@ -8,9 +8,7 @@ class HomeContentWidget extends StatelessWidget {
   const HomeContentWidget({Key key, this.movimentacoes}) : super(key: key);
 
   getColorByTransactionType(Transacao transacao) {
-    return transacao.tipo == 0
-        ? main.nubankVermelhoChiclete
-        : transacao.tipo == 1 ? main.nubankVerde : main.nubankAzul;
+    return transacao.tipo == 1 ? main.nubankVerde : main.nubankCinza;
   }
 
   @override

@@ -38,7 +38,7 @@ class ChartBarWidget extends StatelessWidget {
     _atribuirLimites();
 
     return Stack(
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       alignment: AlignmentDirectional.centerStart,
       children: <Widget>[
         SizedBox(
