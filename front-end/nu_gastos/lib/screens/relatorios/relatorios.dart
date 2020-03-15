@@ -22,7 +22,7 @@ class RelatoriosWidget extends StatelessWidget {
                 barLimit: 400,
                 bars: <Bar>[
                   Bar(barColor: main.nubankAzul, height: 100, isFirstBar: true),
-                  //Bar(barColor: main.nubankVermelhoChiclete, height: 100),
+                  Bar(barColor: main.nubankVermelhoChiclete, height: 100),
                   //Bar(barColor: main.nubankVerde, height: 100),
                   //Bar(barColor: main.nubankRoxoCinza, height: 100),
                   //Bar(barColor: main.nubankBranco, height: 50),
