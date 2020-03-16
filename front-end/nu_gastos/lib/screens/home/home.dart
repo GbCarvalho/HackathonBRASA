@@ -240,7 +240,7 @@ class _HomeState extends State<Home> {
         scale: 1.2,
         child: SpeedDial(
             marginRight: MediaQuery.of(context).size.width * 0.465,
-            marginBottom: MediaQuery.of(context).size.height * 0.06,
+            marginBottom: MediaQuery.of(context).size.height * 0.08,
             backgroundColor: main.nubankRoxoCinza,
             overlayColor: Colors.black,
             overlayOpacity: 0.5,
