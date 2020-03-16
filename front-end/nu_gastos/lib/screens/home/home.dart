@@ -20,37 +20,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var _currentIndex = 0;
   PageController pageController;
-
   String qrcodeResult = "";
 
-  Future _scanQR() async {
-    try {
-      String qrResult = await BarcodeScanner.scan();
-      setState(() {
-        qrcodeResult = qrResult;
-      });
-    } on PlatformException catch (ex) {
-      if (ex.code == BarcodeScanner.CameraAccessDenied) {
-        setState(() {
-          qrcodeResult = "Camera permissions was denied!";
-        });
-      } else {
-        setState(() {
-          qrcodeResult = 'Unknown Error $ex';
-        });
-      }
-    } on FormatException {
-      setState(() {
-        qrcodeResult = "You pressed the back button before scanning anything";
-      });
-    } catch (ex) {
-      setState(() {
-        qrcodeResult = 'Unknown Error $ex';
-      });
-    }
-  }
-
-  // Destinos para as telas
+  //* Destinos para as telas
   Map<int, Widget> pages = {
     0: HomeContentWidget(
       movimentacoes: <Transacao>[
@@ -93,127 +65,164 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 1,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Entypo.funnel,
-                size: 28,
-                color: main.nubankRoxoCinza,
-              ),
-              onPressed: () {},
+      appBar: _buildAppBar(),
+      body: _buildPageView(),
+      bottomNavigationBar: _buildBottomBar(),
+      floatingActionButton: _buildSpeedDial(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+//* Função responsável pela leitura do QR Code
+  Future _scanQR() async {
+    try {
+      String qrResult = await BarcodeScanner.scan();
+      setState(() {
+        qrcodeResult = qrResult;
+      });
+    } on PlatformException catch (ex) {
+      if (ex.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          qrcodeResult = "Camera permissions was denied!";
+        });
+      } else {
+        setState(() {
+          qrcodeResult = 'Unknown Error $ex';
+        });
+      }
+    } on FormatException {
+      setState(() {
+        qrcodeResult = "You pressed the back button before scanning anything";
+      });
+    } catch (ex) {
+      setState(() {
+        qrcodeResult = 'Unknown Error $ex';
+      });
+    }
+  }
+
+  //* Função que constrói a barra superior com o botão filtrar e fechar
+  _buildAppBar() => AppBar(
+        elevation: 1,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Entypo.funnel,
+              size: 28,
+              color: main.nubankRoxoCinza,
             ),
-            Spacer(),
-            Center(
-              child: Text(
-                'Nu Gasto',
-                style: Theme.of(context).textTheme.title,
-              ),
+            onPressed: () {},
+          ),
+          Spacer(),
+          Center(
+            child: Text(
+              'Nu Gasto',
+              style: Theme.of(context).textTheme.title,
             ),
-            Spacer(),
-            IconButton(
-              icon: Icon(
-                Icons.close,
-                size: 28,
-                color: main.nubankRoxoCinza,
-              ),
-              onPressed: () {},
+          ),
+          Spacer(),
+          IconButton(
+            icon: Icon(
+              Icons.close,
+              size: 28,
+              color: main.nubankRoxoCinza,
+            ),
+            onPressed: () {},
+          ),
+        ],
+      );
+
+  //* Função que constrói um pageview com as páginas que compõe o body da aplicação. Todas as páginas estão no Map 'pages'
+  _buildPageView() => PageView.builder(
+        physics: ScrollPhysics(),
+        onPageChanged: (int page) {
+          setState(() {
+            _currentIndex = page;
+          });
+        },
+        itemCount: pages.length - 1,
+        controller: pageController,
+        reverse: false,
+        itemBuilder: (context, page) {
+          return pages[page];
+        },
+      );
+
+  //* Função que constrói a barra de navegação inferior com os seus itens
+  _buildBottomBar() => SafeArea(
+        bottom: true,
+        left: true,
+        right: true,
+        maintainBottomViewPadding: true,
+        child: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Theme.of(context).bottomAppBarColor,
+          selectedItemColor: main.nubankCinza,
+          elevation: 0,
+          selectedFontSize: 15,
+          unselectedFontSize: 12,
+          iconSize: 5,
+          showSelectedLabels: true,
+          selectedIconTheme: IconThemeData(
+            color: Colors.orange,
+          ),
+          onTap: (page) {
+            pageController.animateToPage(page,
+                duration: Duration(seconds: 1), curve: Curves.easeOutQuint);
+          },
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/money.svg'),
+              title: Text('Transações'),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/relatorios.svg'),
+              title: Text('Relatórios'),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/newspaper.svg'),
+              title: Text('Educação \nFinanceira'),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/target.svg'),
+              title: Text('Metas'),
             ),
           ],
         ),
-        body: PageView.builder(
-          physics: ScrollPhysics(),
-          onPageChanged: (int page) {
-            setState(() {
-              _currentIndex = page;
-            });
-          },
-          itemCount: pages.length - 1,
-          controller: pageController,
-          reverse: false,
-          itemBuilder: (context, page) {
-            return pages[page];
-          },
-        ),
-        bottomNavigationBar: SafeArea(
-          bottom: true,
-          left: true,
-          right: true,
-          maintainBottomViewPadding: true,
-          child: BottomNavigationBar(
-            currentIndex: _currentIndex,
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Theme.of(context).bottomAppBarColor,
-            selectedItemColor: main.nubankCinza,
-            elevation: 0,
-            selectedFontSize: 15,
-            unselectedFontSize: 12,
-            iconSize: 5,
-            showSelectedLabels: true,
-            selectedIconTheme: IconThemeData(
-              color: Colors.orange,
-            ),
-            onTap: (page) {
-              pageController.animateToPage(page,
-                  duration: Duration(seconds: 1), curve: Curves.easeOutQuint);
-            },
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/icons/money.svg'),
-                title: Text('Transações'),
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/icons/relatorios.svg'),
-                title: Text('Relatórios'),
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/icons/newspaper.svg'),
-                title: Text('Educação \nFinanceira'),
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset('assets/icons/target.svg'),
-                title: Text('Metas'),
-              ),
-            ],
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: SafeArea(
-          maintainBottomViewPadding: true,
-          child: Transform.scale(
-            scale: 1.2,
-            child: _buildSpeedDial(),
-          ),
-        ));
-  }
+      );
 
+// * Função que constrói o Speed Dial
+  _buildSpeedDial() => Transform.scale(
+        scale: 1.2,
+        child: SpeedDial(
+            marginRight: MediaQuery.of(context).size.width * 0.465,
+            marginBottom: MediaQuery.of(context).size.height * 0.06,
+            backgroundColor: main.nubankRoxoCinza,
+            overlayColor: Colors.black,
+            overlayOpacity: 0.5,
+            child: Icon(MaterialCommunityIcons.qrcode_scan),
+            children: [
+              SpeedDialChild(
+                labelBackgroundColor: main.nubankRoxoEscuro,
+                backgroundColor: main.nubankRoxoEscuroClaro,
+                foregroundColor: main.nubankRoxoCinza,
+                child: Icon(MaterialCommunityIcons.qrcode_scan),
+                label: "Scanner de notas",
+                labelStyle: TextStyle(fontSize: 11),
+                onTap: _scanQR,
+              ),
+              SpeedDialChild(
+                labelBackgroundColor: main.nubankRoxoEscuro,
+                backgroundColor: main.nubankRoxoEscuroClaro,
+                foregroundColor: main.nubankRoxoCinza,
+                child: Icon(MaterialCommunityIcons.pencil_plus_outline),
+                label: "Lançamento manual",
+                labelStyle: TextStyle(fontSize: 11),
+              )
+            ]),
+      );
+
+  // * Função que constrói um Speed Dial alternativo 1
   _buildSecondSpeedDial() {}
-
-  _buildSpeedDial() => SpeedDial(
-          marginRight: MediaQuery.of(context).size.width * 0.465,
-          marginBottom: MediaQuery.of(context).size.height * 0.06,
-          backgroundColor: main.nubankRoxoCinza,
-          overlayColor: Colors.black,
-          overlayOpacity: 0.5,
-          child: Icon(MaterialCommunityIcons.qrcode_scan),
-          children: [
-            SpeedDialChild(
-              labelBackgroundColor: main.nubankRoxoEscuro,
-              backgroundColor: main.nubankRoxoEscuroClaro,
-              foregroundColor: main.nubankRoxoCinza,
-              child: Icon(MaterialCommunityIcons.qrcode_scan),
-              label: "Scanner de notas",
-              labelStyle: TextStyle(fontSize: 11),
-              onTap: _scanQR,
-            ),
-            SpeedDialChild(
-              labelBackgroundColor: main.nubankRoxoEscuro,
-              backgroundColor: main.nubankRoxoEscuroClaro,
-              foregroundColor: main.nubankRoxoCinza,
-              child: Icon(MaterialCommunityIcons.pencil_plus_outline),
-              label: "Lançamento manual",
-              labelStyle: TextStyle(fontSize: 11),
-            )
-          ]);
 }
