@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nu_gasto/main.dart' as main;
 import 'package:nu_gasto/model/transacao.dart';
 import 'package:nu_gasto/screens/educacao/educacao.dart';
+import 'package:nu_gasto/model/materia.dart';
 import 'package:nu_gasto/screens/home/content.dart';
 import 'package:nu_gasto/screens/lancamentos_manuais.dart';
 import 'package:nu_gasto/screens/metas.dart';
@@ -45,7 +46,20 @@ class _HomeState extends State<Home> {
       ],
     ), //'Home': //'Relatorios'
     1: RelatoriosWidget(), //'Tela de relatorios'
-    2: EducacaoWidget(), //'Educação'
+    2: EducacaoWidget(
+      materias: <Materia>[
+        Materia(
+          title: 'Como criar bons hábitos financeiros?',
+          imageURL: 'https://bit.ly/2ISTvMc',
+          url:
+              'https://blog.nubank.com.br/como-criar-bons-habitos-financeiros/',
+        ),
+        Materia(
+          title: 'Como criar bons hábitos financeiros?',
+          imageURL: 'https://bit.ly/2ISTvMc',
+        ),
+      ],
+    ), //'Educação'
     3: MetasWidget(), //'Metas'
     4: LancamentosManuaisWidget(), //'Lançamento Manual'
   };

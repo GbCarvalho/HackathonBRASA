@@ -4,6 +4,10 @@ import 'package:nu_gasto/main.dart' as main;
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MateriaWebviewer extends StatefulWidget {
+  String destinationURL;
+
+  MateriaWebviewer({Key key, this.destinationURL}) : super(key: key);
+
   @override
   _MateriaWebviewerState createState() => _MateriaWebviewerState();
 }
@@ -16,8 +20,7 @@ class _MateriaWebviewerState extends State<MateriaWebviewer> {
           backgroundColor: main.nubankRoxoEscuro,
           title: Text('Como criar bons hábitos financeiros?')),
       body: WebView(
-        initialUrl:
-            'https://blog.nubank.com.br/como-criar-bons-habitos-financeiros/',
+        initialUrl: widget.destinationURL,
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: main.nubankRoxoPrincipal,

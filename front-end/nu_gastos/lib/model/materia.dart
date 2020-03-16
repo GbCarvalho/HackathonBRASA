@@ -1,27 +1,38 @@
 class Materia {
   String id;
-  String uRL;
-  String image;
+  String url;
   String title;
-  String points;
+  String imageURL;
+  String reward;
 
-  Materia({this.uRL, this.image, this.title, this.points});
+  Materia(
+      {this.id,
+      this.url = 'https://www.google.com/',
+      this.title,
+      this.imageURL,
+      this.reward});
 
   Materia.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    uRL = json['URL'];
-    image = json['image'];
+    url = json['url'];
     title = json['title'];
-    points = json['points'];
+    imageURL = json['imageURL'];
+    reward = json['reward'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['URL'] = this.uRL;
-    data['image'] = this.image;
+    data['url'] = this.url;
     data['title'] = this.title;
-    data['points'] = this.points;
+    data['imageURL'] = this.imageURL;
+    data['reward'] = this.reward;
     return data;
+  }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return '\n*************************\n     id: ${this.id}\n    url: ${this.url}\n   title: ${this.title}\n   imageUrl: ${this.imageURL}\n   reward: ${this.reward}';
   }
 }
