@@ -57,19 +57,25 @@ class _EducacaoWidgetState extends State<EducacaoWidget> {
                   child: Column(
                     children: <Widget>[
                       Expanded(
-                          child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: main.nubankRoxoPrincipal,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
+                          child: Stack(
+                        fit: StackFit.expand,
+                        children: <Widget>[
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: main.nubankRoxoPrincipal,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                              ),
+                            ),
+                            child: Image.network(
+                              materia.imageURL,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        child: Image.network(
-                          materia.imageURL,
-                          fit: BoxFit.cover,
-                        ),
+                          _buildRewardIndicator(reward: materia.reward),
+                        ],
                       )),
                       Expanded(
                           child: Container(
@@ -99,4 +105,28 @@ class _EducacaoWidgetState extends State<EducacaoWidget> {
 
     return list;
   }
+
+  _buildRewardIndicator({reward}) => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: Container(
+              width: 120,
+              height: 30,
+              child: Center(
+                child: Text(
+                  '${reward == null ? 0 : reward} pontos',
+                  style:
+                      TextStyle(color: main.nubankRoxoPrincipal, fontSize: 25),
+                ),
+              ),
+              decoration: BoxDecoration(
+                  color: main.nubankBranco,
+                  borderRadius: BorderRadius.circular(6)),
+            ),
+          ),
+        ],
+      );
 }

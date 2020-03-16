@@ -51,6 +51,7 @@ class _HomeState extends State<Home> {
         Materia(
           title: 'Como criar bons hábitos financeiros?',
           imageURL: 'https://bit.ly/2ISTvMc',
+          reward: 5,
           url:
               'https://blog.nubank.com.br/como-criar-bons-habitos-financeiros/',
         ),

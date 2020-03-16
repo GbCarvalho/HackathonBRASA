@@ -3,7 +3,7 @@ class Materia {
   String url;
   String title;
   String imageURL;
-  String reward;
+  int reward;
 
   Materia(
       {this.id,
