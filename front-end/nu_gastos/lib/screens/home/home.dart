@@ -58,16 +58,19 @@ class _HomeState extends State<Home> {
           title: 'Cartão de crédito sem anuidade: como escolher?',
           imageURL: 'https://bit.ly/2QkGkrv',
           url: 'https://bit.ly/38UkzoY',
+          reward: 8,
         ),
         Materia(
           title: 'Como “limpar um nome sujo”?',
           imageURL: 'https://bit.ly/38U6gAV',
           url: 'https://bit.ly/2w3rCyx',
+          reward: 11,
         ),
         Materia(
           title: 'Phishing, Vishing e Smishing: o que são esses golpes?',
           imageURL: 'https://bit.ly/3d7efxF',
           url: 'https://bit.ly/2w2GKMA',
+          reward: 7,
         ),
         Materia(
           title: 'Por que é tão difícil juntar dinheiro?',
@@ -78,6 +81,7 @@ class _HomeState extends State<Home> {
           title: 'Educação financeira: o que é e por que ela é importante?',
           imageURL: 'https://bit.ly/2TVLDAc',
           url: 'https://bit.ly/39VSjnn',
+          reward: 10,
         ),
       ],
     ), //'Educação'
