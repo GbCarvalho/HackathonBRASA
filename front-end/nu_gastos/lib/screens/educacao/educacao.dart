@@ -81,13 +81,16 @@ class _EducacaoWidgetState extends State<EducacaoWidget> {
                       Expanded(
                           child: Container(
                         child: Center(
-                          child: Text(
-                            materia.title,
-                            style: TextStyle(
-                              fontSize: 45,
-                              // fontWeight: FontWeight.bold,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              materia.title,
+                              style: TextStyle(
+                                fontSize: 24,
+                                // fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ))
