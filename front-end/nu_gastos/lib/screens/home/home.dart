@@ -70,14 +70,6 @@ class _HomeState extends State<Home> {
           categoria: 'Rendas',
           data: DateTime.now().toString(),
         ),
-        Transacao(
-          tipo: 2,
-          nome: 'Notebook',
-          descricao: 'Compra do novo laptop',
-          valor: 25000,
-          categoria: 'Compras',
-          data: DateTime.now().toString(),
-        ),
       ],
     ), //'Home': //'Relatorios'
     1: RelatoriosWidget(), //'Tela de relatorios'
@@ -193,7 +185,7 @@ class _HomeState extends State<Home> {
             scale: 1.2,
             child: Container(
               child: SpeedDial(
-                  marginRight: MediaQuery.of(context).size.width * 0.43,
+                  marginRight: MediaQuery.of(context).size.width * 0.46,
                   marginBottom: MediaQuery.of(context).size.height * 0.07,
                   backgroundColor: main.nubankRoxoCinza,
                   overlayColor: Colors.black,
@@ -223,10 +215,3 @@ class _HomeState extends State<Home> {
         ));
   }
 }
-
-// FloatingActionButton(
-//           onPressed: _scanQR,
-//           backgroundColor: main.nubankRoxoCinza,
-//           splashColor: main.nubankRoxoPrincipal,
-//           child: Center(child: Icon(MaterialCommunityIcons.qrcodee_scan)),
-//         ),
