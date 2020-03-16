@@ -73,9 +73,9 @@ class _HomeState extends State<Home> {
       ],
     ), //'Home': //'Relatorios'
     1: RelatoriosWidget(), //'Tela de relatorios'
-    2: LancamentosManuaisWidget(), //'Lançamento Manual'
-    3: EducacaoWidget(), //'Educação'
-    4: MetasWidget(), //'Metas'
+    2: EducacaoWidget(), //'Educação'
+    3: MetasWidget(), //'Metas'
+    4: LancamentosManuaisWidget(), //'Lançamento Manual'
   };
 
   @override
@@ -151,12 +151,15 @@ class _HomeState extends State<Home> {
             unselectedFontSize: 12,
             iconSize: 5,
             showSelectedLabels: true,
-            selectedIconTheme: IconThemeData(
-              color: Colors.orange,
+            selectedIconTheme: IconThemeData(color: Colors.orange),
+            unselectedLabelStyle: TextStyle(color: main.nubankRoxoCinza),
+            selectedLabelStyle: TextStyle(
+              color: main.nubankCinza,
             ),
             onTap: (page) {
               pageController.animateToPage(page,
-                  duration: Duration(seconds: 1), curve: Curves.easeOutQuint);
+                  duration: Duration(milliseconds: 700),
+                  curve: Curves.easeOutQuint);
             },
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
