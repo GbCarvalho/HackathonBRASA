@@ -20,31 +20,31 @@ class _HomeState extends State<Home> {
   var _currentIndex = 0;
   PageController pageController;
 
-  String qrcodResult = "";
+  String qrcodeResult = "";
 
   Future _scanQR() async {
     try {
       String qrResult = await BarcodeScanner.scan();
       setState(() {
-        qrcodResult = qrResult;
+        qrcodeResult = qrResult;
       });
     } on PlatformException catch (ex) {
       if (ex.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
-          qrcodResult = "Camera permissions was denied!";
+          qrcodeResult = "Camera permissions was denied!";
         });
       } else {
         setState(() {
-          qrcodResult = 'Unknown Error $ex';
+          qrcodeResult = 'Unknown Error $ex';
         });
       }
     } on FormatException {
       setState(() {
-        qrcodResult = "You pressed the back button before scanning anything";
+        qrcodeResult = "You pressed the back button before scanning anything";
       });
     } catch (ex) {
       setState(() {
-        qrcodResult = 'Unknown Error $ex';
+        qrcodeResult = 'Unknown Error $ex';
       });
     }
   }
@@ -233,5 +233,5 @@ class _HomeState extends State<Home> {
 //           onPressed: _scanQR,
 //           backgroundColor: main.nubankRoxoCinza,
 //           splashColor: main.nubankRoxoPrincipal,
-//           child: Center(child: Icon(MaterialCommunityIcons.qrcode_scan)),
+//           child: Center(child: Icon(MaterialCommunityIcons.qrcodee_scan)),
 //         ),
