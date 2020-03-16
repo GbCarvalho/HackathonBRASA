@@ -1,15 +1,14 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:nu_gasto/main.dart' as main;
 import 'package:webview_flutter/webview_flutter.dart';
 
-class MaterialWebviewer extends StatefulWidget {
+class MateriaWebviewer extends StatefulWidget {
   @override
-  _MaterialWebviewerState createState() => _MaterialWebviewerState();
+  _MateriaWebviewerState createState() => _MateriaWebviewerState();
 }
 
-class _MaterialWebviewerState extends State<MaterialWebviewer> {
+class _MateriaWebviewerState extends State<MateriaWebviewer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,20 +22,10 @@ class _MaterialWebviewerState extends State<MaterialWebviewer> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: main.nubankRoxoPrincipal,
         label: Text('Provinha :D'),
-        icon: Icon(Icons.skip_next),
+        icon: Icon(MaterialIcons.navigate_next),
         onPressed: null,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
-
-// Scaffold(
-//         appBar: AppBar(
-//           backgroundColor: main.nubankRoxoEscuro,
-//         ),
-//         body: WebView(
-//           initialUrl:
-//               'https://blog.nubank.com.br/como-criar-bons-habitos-financeiros/',
-//         ));
-//   }
