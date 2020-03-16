@@ -52,11 +52,32 @@ class _HomeState extends State<Home> {
           title: 'Como criar bons hábitos financeiros?',
           imageURL: 'https://bit.ly/2ISTvMc',
           reward: 5,
-          url:
-              'https://blog.nubank.com.br/como-criar-bons-habitos-financeiros/',
+          url: 'https://bit.ly/39VecDp',
         ),
         Materia(
-          imageURL: 'https://bit.ly/2ISTvMc',
+          title: 'Cartão de crédito sem anuidade: como escolher?',
+          imageURL: 'https://bit.ly/2QkGkrv',
+          url: 'https://bit.ly/38UkzoY',
+        ),
+        Materia(
+          title: 'Como “limpar um nome sujo”?',
+          imageURL: 'https://bit.ly/38U6gAV',
+          url: 'https://bit.ly/2w3rCyx',
+        ),
+        Materia(
+          title: 'Phishing, Vishing e Smishing: o que são esses golpes?',
+          imageURL: 'https://bit.ly/3d7efxF',
+          url: 'https://bit.ly/2w2GKMA',
+        ),
+        Materia(
+          title: 'Por que é tão difícil juntar dinheiro?',
+          imageURL: 'https://bit.ly/2U9fCDC',
+          url: 'https://bit.ly/2UcarCH',
+        ),
+        Materia(
+          title: 'Educação financeira: o que é e por que ela é importante?',
+          imageURL: 'https://bit.ly/2TVLDAc',
+          url: 'https://bit.ly/39VSjnn',
         ),
       ],
     ), //'Educação'

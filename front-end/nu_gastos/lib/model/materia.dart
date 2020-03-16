@@ -7,8 +7,8 @@ class Materia {
 
   Materia(
       {this.id,
-      this.url = 'https://www.google.com/',
-      this.title = 'Google',
+      this.url = 'https://blog.nubank.com.br/',
+      this.title = 'Fala Nubank',
       this.imageURL,
       this.reward});
 
