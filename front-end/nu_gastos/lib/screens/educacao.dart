@@ -13,6 +13,7 @@ class _EducacaoWidgetState extends State<EducacaoWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.deepPurple,
       child: Center(
         child: Text('Educação Financeira'),
       ),

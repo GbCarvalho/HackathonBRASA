@@ -1,5 +1,6 @@
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nu_gasto/main.dart' as main;
 import 'package:nu_gasto/model/transacao.dart';
 import 'package:nu_gasto/screens/educacao.dart';
@@ -51,8 +52,7 @@ class _HomeState extends State<Home> {
 
   // Destinos para as telas
   Map<int, Widget> pages = {
-    0: RelatoriosWidget(), //'Relatorios'
-    1: HomeContentWidget(
+    0: HomeContentWidget(
       movimentacoes: <Transacao>[
         Transacao(
           tipo: 0,
@@ -79,7 +79,8 @@ class _HomeState extends State<Home> {
           data: DateTime.now().toString(),
         ),
       ],
-    ), //'Home':
+    ), //'Home': //'Relatorios'
+    1: RelatoriosWidget(), //'Tela de relatorios'
     2: LancamentosManuaisWidget(), //'Lançamento Manual'
     3: EducacaoWidget(), //'Educação'
     4: MetasWidget(), //'Metas'
@@ -144,87 +145,66 @@ class _HomeState extends State<Home> {
           },
         ),
         bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentIndex,
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Theme.of(context).bottomAppBarColor,
-            selectedIconTheme: IconThemeData(
-              color: Colors.white,
-              size: 42,
+          currentIndex: _currentIndex,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Theme.of(context).bottomAppBarColor,
+          selectedIconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+          onTap: (page) {
+            pageController.animateToPage(page,
+                duration: Duration(seconds: 1), curve: Curves.easeOutQuint);
+          },
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/money.svg'),
+              title: Text('Transações'),
             ),
-            onTap: (page) {
-              pageController.animateToPage(page,
-                  duration: Duration(seconds: 1), curve: Curves.easeOutQuint);
-            },
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(
-                  MaterialCommunityIcons.script_text_outline,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                title: Text(
-                  'Relatórios',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  MaterialCommunityIcons.pencil_plus_outline,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                title: Text(
-                  'Home',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.local_library,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                title: Text(
-                  'Lançamento manual',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.merge_type,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                title: Text(
-                  'Educação',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ]),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/relatorios.svg'),
+              title: Text('Relatórios'),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/newspaper.svg'),
+              title: Text('Educação Financeira'),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/target.svg'),
+              title: Text('Educação Financeira'),
+            ),
+          ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Transform.scale(
           scale: 1.2,
-          child: SpeedDial(
-              marginRight: MediaQuery.of(context).size.width * 0.43,
-              marginBottom: MediaQuery.of(context).size.height * 0.07,
-              backgroundColor: main.nubankRoxoCinza,
-              overlayColor: Colors.black,
-              overlayOpacity: 0.5,
-              child: Icon(MaterialCommunityIcons.qrcode_scan),
-              children: [
-                SpeedDialChild(
-                  labelBackgroundColor: main.nubankRoxoEscuro,
-                  backgroundColor: main.nubankRoxoEscuroClaro,
-                  foregroundColor: main.nubankRoxoCinza,
-                  child: Icon(MaterialCommunityIcons.qrcode_scan),
-                  label: "Scanner de notas",
-                  labelStyle: TextStyle(fontSize: 11),
-                  onTap: _scanQR,
-                ),
-                SpeedDialChild(
-                  labelBackgroundColor: main.nubankRoxoEscuro,
-                  backgroundColor: main.nubankRoxoEscuroClaro,
-                  foregroundColor: main.nubankRoxoCinza,
-                  child: Icon(MaterialCommunityIcons.pencil_plus_outline),
-                  label: "Lançamento manual",
-                  labelStyle: TextStyle(fontSize: 11),
-                )
-              ]),
+          child: Container(
+            child: SpeedDial(
+                marginRight: MediaQuery.of(context).size.width * 0.43,
+                marginBottom: MediaQuery.of(context).size.height * 0.07,
+                backgroundColor: main.nubankRoxoCinza,
+                overlayColor: Colors.black,
+                overlayOpacity: 0.5,
+                child: Icon(MaterialCommunityIcons.qrcode_scan),
+                children: [
+                  SpeedDialChild(
+                    labelBackgroundColor: main.nubankRoxoEscuro,
+                    backgroundColor: main.nubankRoxoEscuroClaro,
+                    foregroundColor: main.nubankRoxoCinza,
+                    child: Icon(MaterialCommunityIcons.qrcode_scan),
+                    label: "Scanner de notas",
+                    labelStyle: TextStyle(fontSize: 11),
+                    onTap: _scanQR,
+                  ),
+                  SpeedDialChild(
+                    labelBackgroundColor: main.nubankRoxoEscuro,
+                    backgroundColor: main.nubankRoxoEscuroClaro,
+                    foregroundColor: main.nubankRoxoCinza,
+                    child: Icon(MaterialCommunityIcons.pencil_plus_outline),
+                    label: "Lançamento manual",
+                    labelStyle: TextStyle(fontSize: 11),
+                  )
+                ]),
+          ),
         ));
   }
 }
