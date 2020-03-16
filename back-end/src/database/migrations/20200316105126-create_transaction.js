@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('transactions', {
+    return queryInterface.createTable("transactions", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,40 +10,40 @@ module.exports = {
       },
       description: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       value: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: false
       },
       transaction_type: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: false
       },
-      payment_type: {
+      manual_transaction_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true
       },
       category_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'categories', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
+        references: { model: "categories", key: "id" },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+        allowNull: true
       },
       user_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: false,
+        references: { model: "users", key: "id" },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+        allowNull: false
       },
       receipt_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'receipts', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
+        references: { model: "receipts", key: "id" },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
@@ -56,6 +56,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('transactions');
+    return queryInterface.dropTable("transactions");
   }
 };
