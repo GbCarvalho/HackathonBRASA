@@ -188,32 +188,32 @@ class _HomeState extends State<Home> {
         ));
   }
 
-  _buildSpeedDial() {
-    return SpeedDial(
-        marginRight: MediaQuery.of(context).size.width * 0.465,
-        marginBottom: MediaQuery.of(context).size.height * 0.06,
-        backgroundColor: main.nubankRoxoCinza,
-        overlayColor: Colors.black,
-        overlayOpacity: 0.5,
-        child: Icon(MaterialCommunityIcons.qrcode_scan),
-        children: [
-          SpeedDialChild(
-            labelBackgroundColor: main.nubankRoxoEscuro,
-            backgroundColor: main.nubankRoxoEscuroClaro,
-            foregroundColor: main.nubankRoxoCinza,
-            child: Icon(MaterialCommunityIcons.qrcode_scan),
-            label: "Scanner de notas",
-            labelStyle: TextStyle(fontSize: 11),
-            onTap: _scanQR,
-          ),
-          SpeedDialChild(
-            labelBackgroundColor: main.nubankRoxoEscuro,
-            backgroundColor: main.nubankRoxoEscuroClaro,
-            foregroundColor: main.nubankRoxoCinza,
-            child: Icon(MaterialCommunityIcons.pencil_plus_outline),
-            label: "Lançamento manual",
-            labelStyle: TextStyle(fontSize: 11),
-          )
-        ]);
-  }
+  _buildSecondSpeedDial() {}
+
+  _buildSpeedDial() => SpeedDial(
+          marginRight: MediaQuery.of(context).size.width * 0.465,
+          marginBottom: MediaQuery.of(context).size.height * 0.06,
+          backgroundColor: main.nubankRoxoCinza,
+          overlayColor: Colors.black,
+          overlayOpacity: 0.5,
+          child: Icon(MaterialCommunityIcons.qrcode_scan),
+          children: [
+            SpeedDialChild(
+              labelBackgroundColor: main.nubankRoxoEscuro,
+              backgroundColor: main.nubankRoxoEscuroClaro,
+              foregroundColor: main.nubankRoxoCinza,
+              child: Icon(MaterialCommunityIcons.qrcode_scan),
+              label: "Scanner de notas",
+              labelStyle: TextStyle(fontSize: 11),
+              onTap: _scanQR,
+            ),
+            SpeedDialChild(
+              labelBackgroundColor: main.nubankRoxoEscuro,
+              backgroundColor: main.nubankRoxoEscuroClaro,
+              foregroundColor: main.nubankRoxoCinza,
+              child: Icon(MaterialCommunityIcons.pencil_plus_outline),
+              label: "Lançamento manual",
+              labelStyle: TextStyle(fontSize: 11),
+            )
+          ]);
 }
