@@ -45,9 +45,9 @@ class _HomeState extends State<Home> {
       ],
     ), //'Home': //'Relatorios'
     1: RelatoriosWidget(), //'Tela de relatorios'
-    2: LancamentosManuaisWidget(), //'Lançamento Manual'
-    3: EducacaoWidget(), //'Educação'
-    4: MetasWidget(), //'Metas'
+    2: EducacaoWidget(), //'Educação'
+    3: MetasWidget(), //'Metas'
+    4: LancamentosManuaisWidget(), //'Lançamento Manual'
   };
 
   @override
@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-//* Função responsável pela leitura do QR Code
+//* Função responsável pela leitura do QR Code *//
   Future _scanQR() async {
     try {
       String qrResult = await BarcodeScanner.scan();
@@ -101,7 +101,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  //* Função que constrói a barra superior com o botão filtrar e fechar
+  //* Função que constrói a barra superior com o botão filtrar e fechar *//
   _buildAppBar() => AppBar(
         elevation: 1,
         actions: <Widget>[
@@ -132,7 +132,7 @@ class _HomeState extends State<Home> {
         ],
       );
 
-  //* Função que constrói um pageview com as páginas que compõe o body da aplicação. Todas as páginas estão no Map 'pages'
+  //* Função que constrói um pageview com as páginas que compõe o body da aplicação. Todas as páginas estão no Map 'pages' *//
   _buildPageView() => PageView.builder(
         physics: ScrollPhysics(),
         onPageChanged: (int page) {
@@ -148,7 +148,7 @@ class _HomeState extends State<Home> {
         },
       );
 
-  //* Função que constrói a barra de navegação inferior com os seus itens
+  //* Função que constrói a barra de navegação inferior com os seus itens *//
   _buildBottomBar() => SafeArea(
         bottom: true,
         left: true,
@@ -164,6 +164,10 @@ class _HomeState extends State<Home> {
           unselectedFontSize: 12,
           iconSize: 5,
           showSelectedLabels: true,
+          unselectedLabelStyle: TextStyle(color: main.nubankRoxoCinza),
+          selectedLabelStyle: TextStyle(
+            color: main.nubankCinza,
+          ),
           selectedIconTheme: IconThemeData(
             color: Colors.orange,
           ),
@@ -192,7 +196,7 @@ class _HomeState extends State<Home> {
         ),
       );
 
-// * Função que constrói o Speed Dial
+// * Função que constrói o Speed Dial *//
   _buildSpeedDial() => Transform.scale(
         scale: 1.2,
         child: SpeedDial(
@@ -223,6 +227,6 @@ class _HomeState extends State<Home> {
             ]),
       );
 
-  // * Função que constrói um Speed Dial alternativo 1
+  // * Função que constrói um Speed Dial alternativo 1 *//
   _buildSecondSpeedDial() {}
 }
