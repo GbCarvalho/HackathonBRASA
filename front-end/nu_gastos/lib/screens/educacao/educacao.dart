@@ -42,6 +42,7 @@ class _EducacaoWidgetState extends State<EducacaoWidget> {
             MaterialPageRoute(
               builder: (context) => MateriaWebviewer(
                 destinationURL: materia.url,
+                title: materia.title,
               ),
             ),
           ),

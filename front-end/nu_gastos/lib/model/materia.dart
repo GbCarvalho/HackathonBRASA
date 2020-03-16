@@ -8,7 +8,7 @@ class Materia {
   Materia(
       {this.id,
       this.url = 'https://www.google.com/',
-      this.title,
+      this.title = 'Google',
       this.imageURL,
       this.reward});
 

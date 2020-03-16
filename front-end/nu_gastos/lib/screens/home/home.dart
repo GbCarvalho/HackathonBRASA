@@ -56,7 +56,6 @@ class _HomeState extends State<Home> {
               'https://blog.nubank.com.br/como-criar-bons-habitos-financeiros/',
         ),
         Materia(
-          title: 'Como criar bons hábitos financeiros?',
           imageURL: 'https://bit.ly/2ISTvMc',
         ),
       ],
