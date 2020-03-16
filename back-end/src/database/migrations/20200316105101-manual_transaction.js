@@ -1,33 +1,25 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("receipts", {
+    return queryInterface.createTable("manual_transaction", {
       access_key: {
         type: Sequelize.STRING,
         allowNull: false,
         primaryKey: true
       },
-      receipt_date: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      user_cpf: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      receipt_value: {
+      transaction_value: {
         type: Sequelize.FLOAT,
         allowNull: false
       },
       taxes_value: {
         type: Sequelize.FLOAT,
-        allowNull: false
+        allowNull: true
       },
       provider_id: {
         type: Sequelize.INTEGER,
         references: { model: "providers", key: "cnpj" },
         onDelete: "SET NULL",
         onUpdate: "CASCADE",
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +33,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("receipts");
+    return queryInterface.dropTable("manual_transaction");
   }
 };
