@@ -17,22 +17,37 @@ class _EducacaoWidgetState extends State<EducacaoWidget> {
   Widget build(BuildContext context) {
     return Container(
         color: main.nubankRoxoEscuroClaro.withOpacity(0.86),
-        child: ListView(
+        child: Column(
           children: <Widget>[
-            ListTile(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MaterialWebviewer()));
-              },
-              leading: Image.network(
-                  'https://i2.wp.com/blog.nubank.com.br/wp-content/uploads/2020/01/ha%CC%81bitos-financeiros-para-guardar-dinheiro_header.jpg?w=1440&ssl=1'),
-              title: Text(
-                'Como criar bons hábitos financeiros?',
-                style: TextStyle(decoration: TextDecoration.underline),
-              ),
-            )
+            ListView(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MaterialWebviewer()));
+                      },
+                      leading: Image.network(
+                          'https://i2.wp.com/blog.nubank.com.br/wp-content/uploads/2020/01/ha%CC%81bitos-financeiros-para-guardar-dinheiro_header.jpg?w=1440&ssl=1'),
+                      title: Text(
+                        'Como criar bons hábitos financeiros?',
+                        style: TextStyle(decoration: TextDecoration.underline),
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: Divider(
+                          thickness: 2,
+                          color: Colors.black.withOpacity(0.15),
+                        ))
+                  ],
+                ),
+              ],
+            ),
           ],
         ));
   }
