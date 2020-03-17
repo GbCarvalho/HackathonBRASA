@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   barcode_scan:
   flutter_speed_dial:
+  flare_flutter: ^2.0.1
 
 dev_dependencies:
   flutter_test:
