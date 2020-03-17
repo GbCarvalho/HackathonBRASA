@@ -1,3 +1,4 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:nu_gasto/main.dart' as main;
 import 'package:nu_gasto/screens/relatorios/chart_bar.dart';
@@ -31,6 +32,16 @@ class RelatoriosWidget extends StatelessWidget {
               ChartBarWidget(),
             ],
           ),
+          Container(
+            width: double.infinity,
+            height: 60,
+            child: FlareActor(
+              'assets/animated_widgets/animated_bars.flr',
+              animation: '1_aumentar',
+              alignment: Alignment.center,
+              fit: BoxFit.cover,
+            ),
+          )
         ],
       ),
     );
