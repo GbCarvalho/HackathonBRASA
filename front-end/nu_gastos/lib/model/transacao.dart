@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nu_gasto/model/nf_info.dart';
+import 'dart:convert';
 
 class Transacao {
   int tipo; // ? {0: "saída", 1 : "entrada", 2 : "meta"}
@@ -9,16 +11,27 @@ class Transacao {
   String categoria;
   IconData icon;
   List<String> gastos;
+  dynamic jsonNfData;
 
-  Transacao(
-      {this.nome,
-      this.descricao,
-      this.valor,
-      this.data,
-      this.categoria,
-      this.gastos,
-      this.icon = Icons.edit,
-      this.tipo}) {
+  set setJsonTransactionInfo(String stringJson) {
+    jsonNfData = stringJson;
+  }
+
+  get formatedJsonNfData {
+    return json.decode(jsonNfData);
+  }
+
+  Transacao({
+    this.nome,
+    this.descricao,
+    this.valor,
+    this.data,
+    this.categoria,
+    this.gastos,
+    this.icon = Icons.edit,
+    this.tipo,
+    this.jsonNfData,
+  }) {
     valor = tipo > 0 ? valor : valor * -1;
   }
 
