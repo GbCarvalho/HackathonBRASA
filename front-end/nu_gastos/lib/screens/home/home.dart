@@ -46,7 +46,8 @@ class _HomeState extends State<Home> {
       ],
     ), //'Home': //'Relatorios'
     1: RelatoriosWidget(), //'Tela de relatorios'
-    2: EducacaoWidget(
+    2: MetasWidget(), //'Metas'
+    3: EducacaoWidget(
       materias: <Materia>[
         Materia(
           title: 'Como criar bons hábitos financeiros?',
@@ -85,7 +86,6 @@ class _HomeState extends State<Home> {
         ),
       ],
     ), //'Educação'
-    3: MetasWidget(), //'Metas'
     4: LancamentosManuaisWidget(), //'Lançamento Manual'
   };
 
@@ -224,12 +224,12 @@ class _HomeState extends State<Home> {
               title: Text('Relatórios'),
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/newspaper.svg'),
-              title: Text('Educação \nFinanceira'),
-            ),
-            BottomNavigationBarItem(
               icon: SvgPicture.asset('assets/icons/target.svg'),
               title: Text('Metas'),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/newspaper.svg'),
+              title: Text('NuGasto +'),
             ),
           ],
         ),
