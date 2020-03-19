@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,6 +14,7 @@ import 'package:nu_gasto/screens/relatorios/relatorios.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'dart:convert';
 
 class Home extends StatefulWidget {
   @override
@@ -23,8 +26,10 @@ class _HomeState extends State<Home> {
   PageController pageController;
   String qrcodeResult = "";
 
+  _generateTransactionList() {}
+
   //* Destinos para as telas
-  Map<int, Widget> pages = {
+  static Map<int, Widget> pages = {
     0: HomeContentWidget(
       movimentacoes: <Transacao>[
         Transacao(
@@ -183,7 +188,77 @@ class _HomeState extends State<Home> {
         controller: pageController,
         reverse: false,
         itemBuilder: (context, page) {
-          return pages[page];
+          return FutureBuilder(
+            future: DefaultAssetBundle.of(context)
+                .loadString('assets/data/data.json'),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (page == 0) {
+                var data = json.decode(snapshot.data.toString());
+                HomeContentWidget home = HomeContentWidget();
+                var descricoes = [
+                  'Pagamento',
+                  'Compra no AliExpress',
+                  'Doação',
+                  'Aluguel da loja',
+                  'Revisão do carro',
+                  'Conta de água',
+                  'Conta de luz',
+                  'Mercado',
+                  'Materiais das crianças',
+                  'Seguro',
+                  'Reforma da casa',
+                  'Urgência',
+                  'Festa',
+                  'Viagem',
+                  'Escola das crianças',
+                  'Empregada',
+                  'Manutençao da bicicleta',
+                  'Mobília Nova',
+                  'Coisas do bebê',
+                  'Dentista',
+                  'Viagem de férias',
+                  'Computador Novo',
+                  'Guarda - Roupas novo',
+                  'Celular novo',
+                  'Compra do mês',
+                ];
+                List<Transacao> transacoes = [];
+
+                print('CONTEUDO DO JSON: ${data['items'].length}');
+
+                data['items'].forEach((item) {
+                  print('Nome do item> ${item['issuer']['name']}');
+                  print('ITEM COMPLETO: $item');
+
+                  var transacao = Transacao(
+                    tipo: Random().nextInt(2),
+                    nome: '${item['issuer']['tradeName']}',
+                    descricao: descricoes[Random().nextInt(descricoes.length)],
+                    valor: double.parse(item['protocol']['payment'][0]
+                            ['paymentDetail'][0]['amount']
+                        .toString()
+                        .replaceAll('\$', '')
+                        .replaceAll(',', '')),
+                    categoria: 'Rendas',
+                    data:
+                        '${item['protocol']['receiptOn'].toString().split('T')[0]}',
+                  );
+
+                  transacao.setJsonTransactionInfo = item.toString();
+
+                  transacoes.add(
+                    transacao,
+                  );
+                });
+
+                home.setMovimentations = transacoes;
+
+                pages[page] = home;
+              }
+
+              return pages[page];
+            },
+          );
         },
       );
 
