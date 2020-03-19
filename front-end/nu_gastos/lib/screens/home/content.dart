@@ -125,7 +125,7 @@ class HomeContentWidget extends StatelessWidget {
                                     width: 2,
                                   ),
                                   Text(
-                                    '${transacao != null ? null : 'Taguatinga'}',
+                                    '${transacao != null ? 'Taguatinga' : 'Taguatinga'}',
                                     style: TextStyle(
                                         color: main.nubankEscuro,
                                         fontWeight: FontWeight.bold),
@@ -174,7 +174,7 @@ class HomeContentWidget extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    'Livro para crianças',
+                                    '${transacao != null ? transacao.descricao : 'Livro para crianças'}',
                                     style: TextStyle(
                                       color: main.nubankEscuro,
                                       decoration: TextDecoration.underline,
@@ -198,7 +198,7 @@ class HomeContentWidget extends StatelessWidget {
                                     ],
                                   ),
                                   Text(
-                                    '30,00',
+                                    '${transacao != null ? transacao.valor.toString().replaceAll('.', ',') : '30,00'}',
                                     style: TextStyle(
                                       color: main.nubankEscuro,
                                       fontWeight: FontWeight.bold,
@@ -227,7 +227,7 @@ class HomeContentWidget extends StatelessWidget {
                                             color: main.nubankRoxoPrincipal),
                                       ),
                                       Text(
-                                        '10/03/2020',
+                                        '${transacao != null ? transacao.data.replaceAll('-', '/') : '10/03/2020'}',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           color: main.nubankRoxoPrincipal,
@@ -262,7 +262,7 @@ class HomeContentWidget extends StatelessWidget {
                               ),
                               Spacer(),
                               Text(
-                                'R\$ 30,00',
+                                '${transacao != null ? transacao.valor.toString().replaceAll('.', ',') : '30,00'}',
                                 style: TextStyle(
                                   color: main.nubankRoxoPrincipal,
                                   fontWeight: FontWeight.bold,
