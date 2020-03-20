@@ -82,7 +82,6 @@ class _HomeState extends State<Home> {
         ),
       ],
     ), //'Educação'
-
     4: LancamentosManuaisWidget(), //'Lançamento Manual'
   };
 
