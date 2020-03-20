@@ -28,7 +28,7 @@ class _MateriaWebviewerState extends State<MateriaWebviewer> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: main.nubankRoxoPrincipal,
-        label: Text('Provinha :D'),
+        label: Text('Recapitular'),
         icon: Icon(MaterialIcons.navigate_next),
         onPressed: null,
       ),

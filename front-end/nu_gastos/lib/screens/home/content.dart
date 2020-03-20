@@ -71,7 +71,9 @@ class HomeContentWidget extends StatelessWidget {
                                     '${transacao != null ? transacao.nome : 'LIVRARIA CULTURA'}',
                                     style: TextStyle(
                                         color: main.nubankRoxoPrincipal,
-                                        fontSize: 30),
+                                        fontSize: transacao.nome.length < 22
+                                            ? 30
+                                            : 25),
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
@@ -176,9 +178,12 @@ class HomeContentWidget extends StatelessWidget {
                                   Text(
                                     '${transacao != null ? transacao.descricao : 'Livro para crianças'}',
                                     style: TextStyle(
-                                      color: main.nubankEscuro,
-                                      decoration: TextDecoration.underline,
-                                    ),
+                                        color: main.nubankEscuro,
+                                        decoration: TextDecoration.underline,
+                                        fontSize:
+                                            transacao.descricao.length > 30
+                                                ? 12
+                                                : 15),
                                   ),
                                   Spacer(),
                                   Row(
@@ -314,7 +319,7 @@ class HomeContentWidget extends StatelessWidget {
             ],
           ),
           subtitle: Text(
-            '${movimentacoes[index].data.split(' ')[0]}',
+            '${movimentacoes[index].data.split(' ')[0]}    ${movimentacoes[index].tipoTransacao}',
             style: TextStyle(color: main.nubankCinza),
           ),
           trailing: Text(

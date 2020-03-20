@@ -10,8 +10,9 @@ class Transacao {
   String data;
   String categoria;
   IconData icon;
-  List<String> gastos;
+  List items;
   dynamic jsonNfData;
+  String tipoTransacao;
 
   set setJsonTransactionInfo(String stringJson) {
     jsonNfData = stringJson;
@@ -26,34 +27,13 @@ class Transacao {
     this.descricao,
     this.valor,
     this.data,
-    this.categoria,
-    this.gastos,
+    this.categoria = 'Categoria',
+    this.items,
     this.icon = Icons.edit,
     this.tipo,
     this.jsonNfData,
+    this.tipoTransacao,
   }) {
     valor = tipo > 0 ? valor : valor * -1;
-  }
-
-  Transacao.fromJson(Map<String, dynamic> json) {
-    tipo = json['tipo'];
-    nome = json['nome'];
-    descricao = json['descricao'];
-    valor = json['valor'];
-    data = json['data'];
-    categoria = json['categoria'];
-    gastos = json['gastos'].cast<String>();
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['tipo'] = this.tipo;
-    data['nome'] = this.nome;
-    data['descricao'] = this.descricao;
-    data['valor'] = this.valor;
-    data['data'] = this.data;
-    data['categoria'] = this.categoria;
-    data['gastos'] = this.gastos;
-    return data;
   }
 }

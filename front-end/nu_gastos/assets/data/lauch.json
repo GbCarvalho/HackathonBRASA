@@ -1,0 +1,127 @@
+{
+  "receipts": [
+    {
+      "accessKey": "53200304059113000113650330002375129268918723",
+      "issuer": {
+        "name": "SUPERMERCADO TATA",
+        "tradeName": "SUPERMERCADO TATA LTDA",
+        "address": {
+          "geolocation": {
+            "lat": "float",
+            "long": "float"
+          }
+        },
+        "type": "Mercado"
+      },
+      "protocol": {
+        "receiptOn": "2020-03-19T16:09:32.970Z"
+      },
+      "items": [
+        {
+          "code": "0660787",
+          "description": "ENERGETICO 473ml MONSTER ULTRA VIOL",
+          "quantity": 1,
+          "totalAmount": 5.99
+        },
+        {
+          "code": "0029432",
+          "description": "BIG BAGUETE QUEIJO E PEITO DE PERU 0.292kg",
+          "quantity": 1,
+          "totalAmount": 5.81
+        },
+        {
+          "code": "0575704",
+          "description": "CASTANHA DE CAJU TORRADA C/ SAL 90g REI",
+          "quantity": 1,
+          "totalAmount": 12.99
+        }
+      ],
+      "payment": [
+        {
+          "paymentDetail": [
+            {
+              "method": "debit",
+              "amount": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "accessKey": "35200257263246000173590004380661727146572672",
+      "issuer": {
+        "name": "DROGARIA ASSIS",
+        "tradeName": "DROGARIA ASSIS LTDA",
+        "address": {
+          "geolocation": {
+            "lat": "float",
+            "long": "float"
+          }
+        },
+        "type": "Saude"
+      },
+      "protocol": {
+        "receiptOn": "2020-03-19T13:09:32.970Z"
+      },
+      "items": [
+        {
+          "code": "734314",
+          "description": "ALCOOL GEL 480G MOPHCLEAN",
+          "quantity": 1,
+          "totalAmount": 15.02
+        }
+      ],
+      "payment": [
+        {
+          "paymentDetail": [
+            {
+              "method": "credit",
+              "amount": 15.99
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "accessKey": "53200302918598000192660020012313161113310782",
+      "issuer": {
+        "name": "VAREJAO DA FARTURA BICALHO",
+        "tradeName": "SACOLAO DE FRUTAS E VERDURAS BICALHO LTDA",
+        "address": {
+          "geolocation": {
+            "lat": "float",
+            "long": "float"
+          }
+        },
+        "type": "Mercado"
+      },
+      "protocol": {
+        "receiptOn": "2020-03-19T16:09:32.970Z"
+      },
+      "items": [
+        {
+          "code": "2029353007649",
+          "description": "PAO DE QUEIJO 0.51KG",
+          "quantity": 1,
+          "totalAmount": 7.64
+        },
+        {
+          "code": "2001282001462",
+          "description": "PAO FRANCES 0.146KG",
+          "quantity": 1,
+          "totalAmount": 1.46
+        }
+      ],
+      "payment": [
+        {
+          "paymentDetail": [
+            {
+              "method": "cash",
+              "amount": 9.10
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

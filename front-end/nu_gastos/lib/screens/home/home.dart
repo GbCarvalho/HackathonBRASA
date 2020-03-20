@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,8 +23,7 @@ class _HomeState extends State<Home> {
   var _currentIndex = 0;
   PageController pageController;
   String qrcodeResult = "";
-
-  _generateTransactionList() {}
+  bool showFilterButton = false;
 
   //* Destinos para as telas
   static Map<int, Widget> pages = {
@@ -51,19 +48,14 @@ class _HomeState extends State<Home> {
       ],
     ), //'Home': //'Relatorios'
     1: RelatoriosWidget(), //'Tela de relatorios'
-    2: EducacaoWidget(
+    2: MetasWidget(), //'Metas'
+    3: EducacaoWidget(
       materias: <Materia>[
         Materia(
           title: 'Como criar bons hábitos financeiros?',
           imageURL: 'https://bit.ly/2ISTvMc',
           reward: 5,
           url: 'https://bit.ly/39VecDp',
-        ),
-        Materia(
-          title: 'Cartão de crédito sem anuidade: como escolher?',
-          imageURL: 'https://bit.ly/2QkGkrv',
-          url: 'https://bit.ly/38UkzoY',
-          reward: 8,
         ),
         Materia(
           title: 'Como “limpar um nome sujo”?',
@@ -90,7 +82,7 @@ class _HomeState extends State<Home> {
         ),
       ],
     ), //'Educação'
-    3: MetasWidget(), //'Metas'
+
     4: LancamentosManuaisWidget(), //'Lançamento Manual'
   };
 
@@ -149,14 +141,16 @@ class _HomeState extends State<Home> {
   _buildAppBar() => AppBar(
         elevation: 1,
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Entypo.funnel,
-              size: 28,
-              color: main.nubankRoxoCinza,
-            ),
-            onPressed: () {},
-          ),
+          showFilterButton
+              ? IconButton(
+                  icon: Icon(
+                    Entypo.funnel,
+                    size: 28,
+                    color: main.nubankRoxoCinza,
+                  ),
+                  onPressed: () {},
+                )
+              : Container(),
           Spacer(),
           Center(
             child: Text(
@@ -190,71 +184,87 @@ class _HomeState extends State<Home> {
         itemBuilder: (context, page) {
           return FutureBuilder(
             future: DefaultAssetBundle.of(context)
-                .loadString('assets/data/data.json'),
+                .loadString('assets/data/lauch.json'),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
+              var data = json.decode(snapshot.data.toString());
+              HomeContentWidget home = HomeContentWidget();
+              List<Transacao> transacoes = [];
+              String accessKeyTarget =
+                  '53200304059113000113650330002375129268918723';
+
+              data['receipts'].forEach((receipt) {
+                // Reservando uma transação para o qr code
+                Transacao reserved;
+                Transacao transacao;
+
+                if (receipt['accessKey'].toString() == accessKeyTarget) {
+                  print(
+                      'ACESSKEY TARGET : ${receipt['accessKey'] == accessKeyTarget}');
+                  reserved = Transacao(
+                      tipo: 0,
+                      nome: '${receipt['issuer']['name']}',
+                      descricao: '${receipt['issuer']['tradeName']}',
+                      valor: 0,
+                      data:
+                          '${receipt['protocol']['receiptOn'].toString().split('T')[0]}',
+                      categoria: 'Categoria',
+                      items: receipt['items'],
+                      tipoTransacao: 'Débito');
+
+                  if (qrcodeResult == accessKeyTarget) {
+                    double itemsValoTotal = 0.0;
+
+                    receipt['items'].forEach((subItem) {
+                      // print('$subItem\n\n');
+                      itemsValoTotal +=
+                          double.parse('${subItem['totalAmount']}');
+                    });
+
+                    reserved.valor = itemsValoTotal;
+
+                    transacoes.add(reserved);
+                    print(
+                        'O qr code foi lido, correspondeu ao alvo e foi adicionado');
+                  }
+                }
+
+                // print('${reserved.nome}');
+
+                if (receipt['accessKey'] != accessKeyTarget) {
+                  transacao = Transacao(
+                      tipo: 0,
+                      nome: '${receipt['issuer']['name']}',
+                      descricao: '${receipt['issuer']['tradeName']}',
+                      valor: 0,
+                      data:
+                          '${receipt['protocol']['receiptOn'].toString().split('T')[0]}',
+                      categoria: 'Categoria',
+                      items: receipt['items'],
+                      tipoTransacao: 'Débito');
+
+                  double itemsValoTotal = 0.0;
+
+                  receipt['items'].forEach((subItem) {
+                    // print('$subItem\n\n');
+                    itemsValoTotal += double.parse('${subItem['totalAmount']}');
+                  });
+
+                  transacao.valor = itemsValoTotal;
+
+                  transacoes.add(transacao);
+                }
+              });
+
+              home.setMovimentations = transacoes;
+
               if (page == 0) {
-                var data = json.decode(snapshot.data.toString());
-                HomeContentWidget home = HomeContentWidget();
-                var descricoes = [
-                  'Pagamento',
-                  'Compra no AliExpress',
-                  'Doação',
-                  'Aluguel da loja',
-                  'Revisão do carro',
-                  'Conta de água',
-                  'Conta de luz',
-                  'Mercado',
-                  'Materiais das crianças',
-                  'Seguro',
-                  'Reforma da casa',
-                  'Urgência',
-                  'Festa',
-                  'Viagem',
-                  'Escola das crianças',
-                  'Empregada',
-                  'Manutençao da bicicleta',
-                  'Mobília Nova',
-                  'Coisas do bebê',
-                  'Dentista',
-                  'Viagem de férias',
-                  'Computador Novo',
-                  'Guarda - Roupas novo',
-                  'Celular novo',
-                  'Compra do mês',
-                ];
-                List<Transacao> transacoes = [];
-
-                print('CONTEUDO DO JSON: ${data['items'].length}');
-
-                data['items'].forEach((item) {
-                  print('Nome do item> ${item['issuer']['name']}');
-                  print('ITEM COMPLETO: $item');
-
-                  var transacao = Transacao(
-                    tipo: Random().nextInt(2),
-                    nome: '${item['issuer']['tradeName']}',
-                    descricao: descricoes[Random().nextInt(descricoes.length)],
-                    valor: double.parse(item['protocol']['payment'][0]
-                            ['paymentDetail'][0]['amount']
-                        .toString()
-                        .replaceAll('\$', '')
-                        .replaceAll(',', '')),
-                    categoria: 'Rendas',
-                    data:
-                        '${item['protocol']['receiptOn'].toString().split('T')[0]}',
-                  );
-
-                  transacao.setJsonTransactionInfo = item.toString();
-
-                  transacoes.add(
-                    transacao,
-                  );
-                });
-
-                home.setMovimentations = transacoes;
-
                 pages[page] = home;
+                showFilterButton = true;
+              } else {
+                showFilterButton = false;
               }
+
+              print('QR CODE RESULT: ${qrcodeResult}');
 
               return pages[page];
             },
@@ -299,12 +309,12 @@ class _HomeState extends State<Home> {
               title: Text('Relatórios'),
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/newspaper.svg'),
-              title: Text('Educação \nFinanceira'),
-            ),
-            BottomNavigationBarItem(
               icon: SvgPicture.asset('assets/icons/target.svg'),
               title: Text('Metas'),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/newspaper.svg'),
+              title: Text('NuGasto +'),
             ),
           ],
         ),
@@ -340,7 +350,4 @@ class _HomeState extends State<Home> {
               )
             ]),
       );
-
-  // * Função que constrói um Speed Dial alternativo 1 *//
-  _buildSecondSpeedDial() {}
 }

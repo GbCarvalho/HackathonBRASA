@@ -15,65 +15,24 @@ String get getTitle => title;
 class RelatoriosWidget extends StatelessWidget with ApiController {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          color: main.nubankRoxoEscuro,
-          child: Column(
-            children: <Widget>[
-              RelatorioMesWidget(
-                bars: <ChartBarWidget>[
-                  ChartBarWidget(
-                    distanceAroundChildChartBars: 0.01,
-                    innerBarsDistance: -10,
-                    barLimit: 400,
-                    bars: <Bar>[
-                      Bar(
-                          barColor: main.nubankAzul,
-                          height: 100,
-                          isFirstBar: true),
-                      Bar(barColor: main.nubankVermelhoChiclete, height: 100),
-                    ],
-                  ),
-                  ChartBarWidget(),
+    return Container(
+      color: main.nubankRoxoEscuro,
+      child: Column(
+        children: <Widget>[
+          RelatorioMesWidget(
+            bars: <ChartBarWidget>[
+              ChartBarWidget(
+                distanceAroundChildChartBars: 0.01,
+                innerBarsDistance: -10,
+                barLimit: 400,
+                bars: <Bar>[
+                  Bar(barColor: main.nubankAzul, height: 100, isFirstBar: true),
+                  Bar(barColor: main.nubankVermelhoChiclete, height: 100),
                 ],
               ),
-              Container(
-                width: double.infinity,
-                height: 50,
-                child: Center(
-                  child: FlareActor(
-                    'assets/animated_widgets/animated_bars.flr',
-                    animation: '1_aumentar',
-                    alignment: Alignment.center,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Spacer(),
-              ButtonBar(
-                alignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  RaisedButton(
-                    child: Hero(
-                      child: Text('Testar Api'),
-                      tag: 'teste',
-                    ),
-                    onPressed: () {
-                      openScreenDestination(
-                        context,
-                        TestNfeDataTreatmentWidget(
-                          data: 'assets/data/data.json',
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              Spacer()
             ],
           ),
-        ),
+        ],
       ),
     );
   }
