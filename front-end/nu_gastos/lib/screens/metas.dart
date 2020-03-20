@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nu_gasto/main.dart' as main;
 
 var title = 'Metas';
 
@@ -12,6 +13,8 @@ class MetasWidget extends StatefulWidget {
 class _MetasWidgetState extends State<MetasWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      color: main.nubankRoxoEscuro,
+    );
   }
 }

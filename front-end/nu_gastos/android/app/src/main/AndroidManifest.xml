@@ -7,6 +7,8 @@
          FlutterApplication and put your custom class here. -->
          <uses-permission android:name="android.premission.INTERNET"/>
          <uses-permission android:name="android.premission.CAMERA"/>
+         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="nu_gasto"
